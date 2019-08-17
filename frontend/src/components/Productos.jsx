@@ -13,21 +13,22 @@ class Productos extends Component {
 
     render() {
         const { productos } = this.props;
-        return (<div>
-            <Tabs />
-            {productos.map(producto => (
-                <Producto
-                    key={producto._id}
-                    name={producto.name}
-                    description={producto.description}
-                    quantity={producto.quantity}
-                    url={producto.url}
+        return (
+            <div>
+                <div className="d-flex justify-content-around flex-wrap">
+                    {productos.map(producto => (
 
-                />
-            ))}
-
-
-        </div>);
+                        <Producto
+                            key={producto._id}
+                            name={producto.name}
+                            price={producto.price}
+                            description={producto.description}
+                            quantity={producto.quantity}
+                            url={producto.url}
+                        />
+                    ))}
+                </div>
+            </div>);
     }
 }
 

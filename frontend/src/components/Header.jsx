@@ -11,7 +11,9 @@ class Header extends Component {
                     <Link to={'/'} className='text-light p-2 '>Pedidos </Link>
                     <Link to={'/'} className='text-light p-2 '>Despachadores </Link>
                 </div>
+                
                 <Link to={'/login/'} className='text-light mr-5'>Iniciar Sesión </Link>
+                <Link to={'/carrito/'} className='text-light mr-5'>Carrito de compras </Link>
             </nav>
 
 

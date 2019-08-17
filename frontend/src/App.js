@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./components/Header";
 import Registro from "./components/RegistrationPages/Registro";
 import Login from "./components/RegistrationPages/Login";
+import Carrito from './components/ShopCar/ShopCartProducts'
 //router
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -22,6 +23,7 @@ function App() {
               <Route exact path="/login/" component={Login} />
               <Route exact path="/" component={Productos} />
               <Route exact path="/registro/" component={Registro} />
+              <Route exact path="/carrito/" component={Carrito} />
             </Switch>
           </div>
         </React.Fragment>
