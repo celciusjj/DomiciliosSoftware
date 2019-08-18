@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addProductToCar } from "../actions/shopCarActions";
+import { addProductToCar } from "../../actions/shopCarActions";
 
 class Producto extends Component {
   state = {

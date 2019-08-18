@@ -11,6 +11,6 @@ export const mostrarProductos = () => async dispatch => {
   const respuesta = await axios.get("http://localhost:4000/product/");
   dispatch({
     type: MOSTRAR_PRODUCTOS,
-    payload: axios.get("http://localhost:4000/product/")
+    payload: respuesta.data
   });
 };

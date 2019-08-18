@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { palabraBuscador } from "../actions/searcherAction";
+import { mostrarProductos } from "../actions/productActions";
 
 class Header extends Component {
-  state = {};
-  //
   render() {
+    this.props.mostrarProductos();
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between  d-flex">
         <div className="d-flex flex-row">
@@ -55,5 +55,5 @@ class Header extends Component {
 
 export default connect(
   null,
-  { palabraBuscador }
+  { palabraBuscador, mostrarProductos }
 )(Header);

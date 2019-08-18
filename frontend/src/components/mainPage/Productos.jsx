@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import Tabs from "./Tabs";
+import Tabs from "../Tabs";
 
 // Redux
 import { connect } from "react-redux";
-import { mostrarProductos } from "../actions/productActions";
+import { mostrarProductos } from "../../actions/productActions";
 import Producto from "./Producto";
 
 class Productos extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.mostrarProductos();
   }
 
@@ -16,21 +16,24 @@ class Productos extends Component {
   };
 
   componentWillReceiveProps() {
+    this.setState({ arrayProductos: this.props.productos });
     this.filterOption();
   }
 
   filterOption() {
     if (this.state.arrayProductos.length > 0 && this.props.palabra) {
-      console.log(
-        this.state.arrayProductos.filter(element =>
-          element.name.includes(this.props.palabra[1])
-        )
-      );
-      this.setState({
-        arrayProductos: this.state.arrayProductos.filter(element =>
-          element.name.includes(this.props.palabra[1])
-        )
-      });
+      if (this.props.palabra.trim().length > 1) {
+        this.setState({
+          arrayProductos: this.state.arrayProductos.filter(element =>
+            element.name
+              .toLowerCase()
+              .trim()
+              .includes(this.props.palabra.toLowerCase().trim())
+          )
+        });
+      } else {
+        this.setState({ arrayProductos: this.props.productos });
+      }
     }
   }
 

@@ -8,7 +8,8 @@ postOrder = (req, res) => {
     var data = {
       order: [
         {
-          name: req.body.order
+          orderPrice: req.body.orderPrice,
+          order: req.body.order
         }
       ]
     };

@@ -8,7 +8,7 @@ export default (state = initialState, action) => {
   return action.type === PALABRA_BUSCADOR
     ? {
         ...state,
-        searcher: [state.searcher, action.payload]
+        searcher: action.payload
       }
     : {};
 };
