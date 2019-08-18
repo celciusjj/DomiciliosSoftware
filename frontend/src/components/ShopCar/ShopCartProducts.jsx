@@ -1,30 +1,24 @@
-import React from 'react';
+import React from "react";
 import { connect } from "react-redux";
-import ShopCarProduct from './ShopCartProduct'
-import { addOrder } from '../../actions/shopCarActions'
+import ShopCarProduct from "./ShopCartProduct";
+import { addOrder } from "../../actions/shopCarActions";
 
-
-
-
-const ShopCarProducts = (props) => {
-
-  function calculateTotal() {
-
-  }
+const ShopCarProducts = props => {
+  function calculateTotal() {}
 
   function makeOrderClick() {
-    const { shopCart } = props
+    const { shopCart } = props;
 
     const order = {
-
       order: [shopCart]
-    }
+    };
 
     props.addOrder(order);
-    console.log(shopCart)
+    console.log(shopCart);
   }
 
-  const { shopCart } = props
+  const { shopCart } = props;
+  console.log(shopCart);
   return (
     <React.Fragment>
       <div className="text-center mt-2 mr-5">
@@ -33,24 +27,22 @@ const ShopCarProducts = (props) => {
           <div className="col-md-8">
             <ul>
               {shopCart.map(product => (
-                <ShopCarProduct
-                  key={product.name}
-                  info={product}
-                ></ShopCarProduct>
+                <ShopCarProduct key={product.name} info={product} />
               ))}
             </ul>
           </div>
         </div>
-        {shopCart.length === 0 ?
+        {shopCart.length === 0 ? (
           <div>Carrito vacio</div>
-          :
-          <button onClick={makeOrderClick} className=" btn btn-primary">Realizar pedido</button>
-        }
+        ) : (
+          <button onClick={makeOrderClick} className=" btn btn-primary">
+            Realizar pedido
+          </button>
+        )}
       </div>
-
     </React.Fragment>
   );
-}
+};
 
 const mapStateToProps = state => {
   return {
@@ -58,6 +50,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { addOrder })(ShopCarProducts);
-
-
+export default connect(
+  mapStateToProps,
+  { addOrder }
+)(ShopCarProducts);
