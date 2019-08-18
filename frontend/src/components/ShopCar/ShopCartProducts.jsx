@@ -6,27 +6,37 @@ import { addOrder } from '../../actions/shopCarActions'
 
 
 
+
 const ShopCarProducts = (props) => {
 
-  function calculateTotal() {
+  const getTotalPrice = () => {
+    const { shopCart } = props
+      let totalValueOfOrder = 0;
+    for (let i = 0; i < shopCart.length; i++) {
+       totalValueOfOrder = shopCart[i].totalPrice + totalValueOfOrder;
+    }
+    return totalValueOfOrder;
+
 
   }
 
   function makeOrderClick() {
-    const { shopCart } = props
+    const { shopCart } = props;
 
     const order = {
-
-      order: [shopCart]
+      orderPrice: getTotalPrice(),
+      order: shopCart
     }
 
     props.addOrder(order);
-    console.log(shopCart)
+
   }
 
   const { shopCart } = props
+
   return (
     <React.Fragment>
+
       <div className="text-center mt-2 mr-5">
         <h2 className="text-center my-5">Su pedido</h2>
         <div className="row justify-content-center">
@@ -39,12 +49,14 @@ const ShopCarProducts = (props) => {
                 ></ShopCarProduct>
               ))}
             </ul>
+
           </div>
         </div>
         {shopCart.length === 0 ?
-          <div>Carrito vacio</div>
+
+          <img src="./tigerProduct.png"></img>
           :
-          <button onClick={makeOrderClick} className=" btn btn-primary">Realizar pedido</button>
+          <button onClick={makeOrderClick} className=" btn btn-primary">Realizar pedido por un valor total de    <span className="badge badge-warning text-dark h3">$ {getTotalPrice()}</span></button>
         }
       </div>
 

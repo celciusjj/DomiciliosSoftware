@@ -7,10 +7,9 @@ postOrder = (req, res) => {
         const db = client.db(nameDB);
         var data =
         {
-            order:[{
-                name: req.body.order,
-
-            }]
+            orderPrice: req.body.orderPrice,
+            order: req.body.order,
+            
 
         }
         db.collection(collectionName).insertOne(data, (err, value) => {
