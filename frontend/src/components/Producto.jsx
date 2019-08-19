@@ -57,32 +57,32 @@ class Producto extends Component {
         const { name, description, url, price } = this.props;
         return (
 
-                <div className="card mt-5 text-center" style={{ width: "220px" }}>
-                    <img src={url} style={{ witdh: "100px", height: "100px" }} className="card-img-top mt-2" alt="..."></img>
+            <div className="card mt-5 text-center" style={{ width: "220px" }}>
+                <img src={url} style={{ witdh: "100px", height: "100px" }} className="card-img-top mt-2" alt="..."></img>
 
-                    <div className="card-body">
-                        <h5 style={{ fontWeight: "bold" }} className="card-title text-center">{name}</h5>
-                        <p className="card-text text-center">$ {price}</p>
-                        <p className="card-text text-center">{description}</p>
+                <div className="card-body">
+                    <h5 style={{ fontWeight: "bold" }} className="card-title text-center">{name}</h5>
+                    <p className="card-text text-center">$ {price}</p>
+                    <p className="card-text text-center">{description}</p>
 
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-sm">
-                                    <button onClick={this.decreaseCounterClick} className="btn btn-primary" style={{ borderRadius: "25px" }}>-</button>
-                                </div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm">
+                                <button onClick={this.decreaseCounterClick} className="btn btn-primary" style={{ borderRadius: "25px" }}>-</button>
+                            </div>
 
-                                <div className="col-sm">
-                                    {this.state.counter}
-                                </div>
+                            <div className="col-sm">
+                                {this.state.counter}
+                            </div>
 
-                                <div className="col-sm">
-                                    <button onClick={this.incrementCounterClick} className="btn btn-primary" style={{ borderRadius: "25px" }} >+</button>
-                                </div>
+                            <div className="col-sm">
+                                <button onClick={this.incrementCounterClick} className="btn btn-primary" style={{ borderRadius: "25px" }} >+</button>
                             </div>
                         </div>
-                        <button onClick={this.addProductClick} className="btn btn-warning mt-3"> Añadir al carrito </button>
                     </div>
+                    <button onClick={this.addProductClick} className="btn btn-warning mt-3"> Añadir al carrito </button>
                 </div>
+            </div>
 
         );
     }
