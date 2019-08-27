@@ -40,7 +40,7 @@ const ShopCarProducts = props => {
           </div>
         </div>
         {shopCart.length === 0 ? (
-          <img src="./tigerProduct.png" />
+          <img src="./tigerProduct.png" alt="" />
         ) : (
           <button onClick={makeOrderClick} className=" btn btn-primary">
             Realizar pedido por un valor total de{" "}

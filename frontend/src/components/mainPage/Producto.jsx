@@ -50,7 +50,6 @@ class Producto extends Component {
   };
 
   render() {
-    const { isAdd } = this.state;
     const { name, description, url, price } = this.props;
     return (
       <div className="card mt-5 text-center" style={{ width: "220px" }}>

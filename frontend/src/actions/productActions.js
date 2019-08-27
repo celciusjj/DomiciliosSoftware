@@ -1,10 +1,4 @@
-import {
-  MOSTRAR_PRODUCTOS,
-  ELIMINAR_PRODUCTO,
-  AGREGAR_PRODUCTO,
-  MOSTRAR_PRODUCTO,
-  EDITAR_PRODUCTO
-} from "./types";
+import { MOSTRAR_PRODUCTOS } from "./types";
 import axios from "axios";
 
 export const mostrarProductos = () => async dispatch => {

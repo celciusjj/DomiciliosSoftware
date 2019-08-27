@@ -1,7 +1,7 @@
 const { client, nameDB } = require("../utils/mongoConf");
 const collectionName = "orders";
 
-postOrder = (req, res) => {
+function postOrder(req, res) {
   client.connect(err => {
     if (err) throw err;
     const db = client.db(nameDB);
@@ -18,8 +18,26 @@ postOrder = (req, res) => {
       res.status(201).send({ product: value.ops[0] });
     });
   });
-};
+}
+
+function getOrders(req, res) {
+  client.connect(err => {
+    if (err) throw err;
+    const db = client.db(nameDB);
+    db.collection(collectionName)
+      .find()
+      .toArray((err, result) => {
+        if (err) throw err;
+        res.status(200).send({
+          status: true,
+          data: result,
+          message: "Ordenes"
+        });
+      });
+  });
+}
 
 module.exports = {
-  postOrder
+  postOrder,
+  getOrders
 };

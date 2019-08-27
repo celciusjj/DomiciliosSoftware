@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Registro from "./components/RegistrationPages/Registro";
 import Login from "./components/RegistrationPages/Login";
 import Carrito from "./components/ShopCar/ShopCartProducts";
+import OrderUser from "./components/order/orderUserPage";
 //router
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -25,6 +26,7 @@ class App extends React.Component {
                 <Route exact path="/" component={Productos} />
                 <Route exact path="/registro/" component={Registro} />
                 <Route exact path="/carrito/" component={Carrito} />
+                <Route exact path="/orderUser/" component={OrderUser} />
               </Switch>
             </div>
           </React.Fragment>

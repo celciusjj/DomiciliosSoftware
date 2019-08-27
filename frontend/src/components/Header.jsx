@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { palabraBuscador } from "../actions/searcherAction";
 import { mostrarProductos } from "../actions/productActions";
+import { getOrders } from "../actions/orderActions";
 
 class Header extends Component {
   render() {
+    this.props.getOrders();
     this.props.mostrarProductos();
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between  d-flex">
@@ -29,6 +31,13 @@ class Header extends Component {
               style={{ float: "right" }}
             >
               Iniciar Sesión
+            </Link>
+            <Link
+              to={"/orderUser/"}
+              className="text-light mr-5"
+              style={{ float: "right" }}
+            >
+              Mis pedidos
             </Link>
             <Link
               to={"/carrito/"}
@@ -55,5 +64,5 @@ class Header extends Component {
 
 export default connect(
   null,
-  { palabraBuscador, mostrarProductos }
+  { palabraBuscador, mostrarProductos, getOrders }
 )(Header);
