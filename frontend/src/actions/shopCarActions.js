@@ -7,10 +7,10 @@ export const addProductToCar = producto => dyspatch => {
   });
 };
 
-export const removeProductToCar = name => dyspatch => {
+export const removeProductToCar = id => dyspatch => {
   dyspatch({
     type: "ELIMINAR_PRODUCTO_CARRO",
-    payload: name
+    payload: id
   });
 };
 

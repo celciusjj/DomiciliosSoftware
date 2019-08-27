@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         shopCart: state.shopCart.filter(
-          product => product.name !== action.payload
+          product => product.id !== action.payload
         )
       };
     default:

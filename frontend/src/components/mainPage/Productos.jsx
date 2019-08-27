@@ -7,8 +7,15 @@ import { mostrarProductos } from "../../actions/productActions";
 import Producto from "./Producto";
 
 class Productos extends Component {
-  componentWillMount() {
+
+  componentDidMount() {
     this.props.mostrarProductos();
+    var searcher = document.getElementById("searcher");
+    searcher.className += " d-inline";
+  }
+
+  componentWillUnmount() {
+    document.getElementById("searcher").classList.remove('d-inline');
   }
 
   state = {
@@ -40,19 +47,21 @@ class Productos extends Component {
   render() {
     return (
       <div>
-        <div className="d-flex justify-content-around flex-wrap" on>
+        <div className="alert alert-primary alertShow">Se agrego</div>
+        <div className="d-flex justify-content-around flex-wrap">
+
           {this.state.arrayProductos.length > 0
             ? this.state.arrayProductos.map(producto => (
-                <Producto
-                  key={producto._id}
-                  name={producto.name}
-                  price={producto.price}
-                  description={producto.description}
-                  quantity={producto.quantity}
-                  url={producto.url}
-                />
-              ))
-            : null}
+              <Producto
+                key={producto._id}
+                name={producto.name}
+                price={producto.price}
+                description={producto.description}
+                quantity={producto.quantity}
+                url={producto.url}
+              />
+            ))
+            : <div className="alert alert-danger justify-content-center" style={{ position: "absolute", top: "50%", }}>No hay productos disponibles</div>}
         </div>
       </div>
     );

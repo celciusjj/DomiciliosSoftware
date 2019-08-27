@@ -23,17 +23,20 @@ class Producto extends Component {
     }
   };
 
-  addProductClick = () => {
-    const { name, price } = this.props;
-    const { counter } = this.state;
 
+
+  addProductClick = () => {
+    const { counter } = this.state;
     if (counter > 0) {
+      const { name, price } = this.props;
+
       const totalPrice = price * counter;
 
       const productoCarrito = {
         name: name,
         counter: counter,
-        totalPrice: totalPrice
+        totalPrice: totalPrice,
+        id: Math.floor((Math.random() * 1000) + 1)
       };
 
       this.setState({
@@ -42,7 +45,6 @@ class Producto extends Component {
       });
 
       alert("se agrego al carrito");
-
       this.props.addProductToCar(productoCarrito);
     } else {
       alert("selecciona la cantidad");
@@ -100,6 +102,8 @@ class Producto extends Component {
             Añadir al carrito{" "}
           </button>
         </div>
+
+        
       </div>
     );
   }

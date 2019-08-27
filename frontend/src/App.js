@@ -13,10 +13,12 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Productos from "./components/mainPage/Productos";
 
+
 class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
+        {console.log("cargo primero")}
         <Router>
           <React.Fragment>
             <Header />

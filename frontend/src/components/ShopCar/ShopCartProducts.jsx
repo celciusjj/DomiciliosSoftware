@@ -40,15 +40,15 @@ const ShopCarProducts = props => {
           </div>
         </div>
         {shopCart.length === 0 ? (
-          <img src="./tigerProduct.png" alt="" />
+          <img style={{width: "60%", heigh: "60%"}} src="../../tigerProduct.png" alt="Image" />
         ) : (
-          <button onClick={makeOrderClick} className=" btn btn-primary">
-            Realizar pedido por un valor total de{" "}
-            <span className="badge badge-warning text-dark h3">
-              $ {getTotalPrice()}
-            </span>
-          </button>
-        )}
+            <button onClick={makeOrderClick} className=" btn btn-primary">
+              Realizar pedido por un valor total de{" "}
+              <span className="badge badge-warning text-dark h3">
+                $ {getTotalPrice()}
+              </span>
+            </button>
+          )}
       </div>
     </React.Fragment>
   );

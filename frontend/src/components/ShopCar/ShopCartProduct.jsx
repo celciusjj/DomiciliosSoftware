@@ -5,8 +5,8 @@ import { removeProductToCar } from "../../actions/shopCarActions";
 
 class ShopCartProduct extends Component {
   deleteClick = () => {
-    const { name } = this.props.info;
-    this.props.removeProductToCar(name);
+    const { id } = this.props.info;
+    this.props.removeProductToCar(id);
   };
 
   render() {
