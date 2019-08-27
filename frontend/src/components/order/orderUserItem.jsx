@@ -1,5 +1,5 @@
 import React from "react";
-import ModalOrderUserItem from "./modalOrderUserItem";
+//import ModalOrderUserItem from "./modalOrderUserItem";
 class OrderUserItem extends React.Component {
   state = {
     openOrderModal: false
@@ -13,6 +13,7 @@ class OrderUserItem extends React.Component {
         <li className="list-group-item">
           <div className="row align-items-center text-center">
             <div className="col-md-8 d-flex justify-content-between align-items-center ">
+              <p className="text-dark m-0">Id: {this.props.idItem}</p>
               <p className="text-dark m-0">Precio total: {this.props.price}</p>
             </div>
             <br />

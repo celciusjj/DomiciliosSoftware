@@ -44,10 +44,10 @@ class Producto extends Component {
         situacional: "producto agregado",
       });
 
-      
+
       this.props.addProductToCar(productoCarrito);
     } else {
-      
+
       this.setState({
         situacional: "agregar cantidad",
       });
@@ -61,13 +61,15 @@ class Producto extends Component {
       <div className="card mt-5 text-center" style={{ width: "220px" }}>
 
         {situacional === "agregar cantidad" ?
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <div class="alert alert-warning text-center" role="alert">
             Ingrese cantidad
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
-          : ""}
+          : situacional === "producto agregado" ?
+            <div class="alert alert-success text-center" role="alert">
+              Producto agregado
+         </div>
+
+            : ""}
 
         <img
           src={url}

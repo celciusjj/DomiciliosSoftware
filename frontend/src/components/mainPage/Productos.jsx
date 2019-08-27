@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { mostrarProductos } from "../../actions/productActions";
 import Producto from "./Producto";
+import Spinner from 'react-bootstrap/Spinner'
 
 
 class Productos extends Component {
@@ -59,12 +60,11 @@ class Productos extends Component {
               />
             ))
           ) : (
-            <div
-              className="alert alert-danger justify-content-center"
-              style={{ position: "absolute", top: "50%" }}
-            >
-              No hay productos disponibles
+
+            <div className="text-center justify-content-center align-middle" style={{ position: "absolute", top: "50%" }}>
+            <Spinner animation="border" style={{ margin: "auto" }} />
             </div>
+
           )}
         </div>
       </div>

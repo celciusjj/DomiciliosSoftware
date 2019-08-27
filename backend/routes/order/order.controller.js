@@ -5,14 +5,20 @@ function postOrder(req, res) {
   client.connect(err => {
     if (err) throw err;
     const db = client.db(nameDB);
-    var data = {
-      orderPrice: req.body.orderPrice,
-      order: req.body.order
-    };
-    db.collection(collectionName).insertOne(data, (err, value) => {
-      if (err) throw err;
-      res.status(201).send({ product: value.ops[0] });
-    });
+    db.collection(collectionName)
+      .find()
+      .toArray((err, value) => {
+        if (err) throw err;
+        var data = {
+          orderId: value.length + 1,
+          orderPrice: req.body.orderPrice,
+          order: req.body.order
+        };
+        db.collection(collectionName).insertOne(data, (err, value) => {
+          if (err) throw err;
+          res.status(201).send({ product: value.ops[0] });
+        });
+      });
   });
 }
 
@@ -40,7 +46,7 @@ function deleteOrder(req, res) {
     const db = client.db(nameDB);
     db.collection(collectionName).deleteOne(
       {
-        orderPrice: parseInt(id)
+        orderId: parseInt(id)
       },
       (err, item) => {
         if (err) throw err;

@@ -3,9 +3,14 @@ import { connect } from "react-redux";
 import ShopCarProduct from "./ShopCartProduct";
 import { addOrder } from "../../actions/shopCarActions";
 
-const ShopCarProducts = props => {
-  const getTotalPrice = () => {
-    const { shopCart } = props;
+class ShopCartProducts extends React.Component {
+  state = {
+    isSend: ''
+  }
+
+
+  getTotalPrice = () => {
+    const { shopCart } = this.props;
     let totalValueOfOrder = 0;
     for (let i = 0; i < shopCart.length; i++) {
       totalValueOfOrder = shopCart[i].totalPrice + totalValueOfOrder;
@@ -13,29 +18,32 @@ const ShopCarProducts = props => {
     return totalValueOfOrder;
   };
 
-  function makeOrderClick() {
-    const { shopCart } = props;
-    
+  makeOrderClick = () => {
+    var { shopCart } = this.props;
     const orderUser = {
-      orderPrice: getTotalPrice(),
+      orderPrice: this.getTotalPrice(),
       order: shopCart
     };
 
-    props.addOrder(orderUser);
+    this.props.addOrder(orderUser);
+    this.setState({
+      isSend: "enviado"
+    })
+    //this.props.history.push("/");
   }
 
-  const { shopCart } = props;
-
-  return (
-    <React.Fragment>
+  render() {
+    const { shopCart } = this.props;
+    const { isSend } = this.state;
+    return (
       <div className="text-center mt-2 mr-5">
         <h2 className="text-center my-5">Su pedido</h2>
         <div className="row justify-content-center">
           <div className="col-md-8">
             <ul>
-              {shopCart.map(product => (
+              {shopCart.length > 0 ? shopCart.map(product => (
                 <ShopCarProduct key={product.name} info={product} />
-              ))}
+              )) : null}
             </ul>
           </div>
         </div>
@@ -46,25 +54,38 @@ const ShopCarProducts = props => {
             alt=""
           />
         ) : (
-          <button onClick={makeOrderClick} className=" btn btn-primary">
-            Realizar pedido por un valor total de{" "}
-            <span className="badge badge-warning text-dark h3">
-              $ {getTotalPrice()}
-            </span>
-          </button>
-        )}
-      </div>
-    </React.Fragment>
-  );
-};
+            <button onClick={this.makeOrderClick} className=" btn btn-primary">
+              Realizar pedido por un valor total de{" "}
+              <span className="badge badge-warning text-dark h3">
+                $ {this.getTotalPrice()}
+              </span>
+            </button>
+          )}
 
-const mapStateToProps = state => {
-  return {
-    shopCart: state.shopCart.shopCart
-  };
-};
+        {isSend == "enviado" ?
+          <div className="alert alert-success text-center mt-5">Pedido enviado</div>
+          : ""}
+      </div>
+    );
+  }
+
+}
+
+const mapStateToProps = state => ({
+
+  shopCart: state.shopCart.shopCart
+
+});
 
 export default connect(
   mapStateToProps,
   { addOrder }
-)(ShopCarProducts);
+)(ShopCartProducts);
+
+
+
+
+
+
+
+
