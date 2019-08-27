@@ -5,17 +5,15 @@ import { palabraBuscador } from "../actions/searcherAction";
 import { mostrarProductos } from "../actions/productActions";
 
 class Header extends Component {
-  state = {
-    isSearcherEnable: true
+
+
+  onClickPedidos = () => {
+    this.setState({
+      isSearcherEnable: false,
+    })
   }
 
-  onClickPedidos = () =>{
-      this.setState({
-        isSearcherEnable: false,
-      })
-  }
-
-  onClickProductos = () =>{
+  onClickProductos = () => {
     this.setState({
       isSearcherEnable: true,
     })
@@ -23,11 +21,11 @@ class Header extends Component {
 
   render() {
     this.props.mostrarProductos();
-    const { isSearcherEnable } = this.state;
+
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between  d-flex">
         <div className="d-flex flex-row">
-          <Link  onClick={this.onClickProductos} to={"/"} className="text-light p-2">
+          <Link onClick={this.onClickProductos} to={"/"} className="text-light p-2">
             Productos
           </Link>
           <Link to={"/"} className="text-light p-2 ">
@@ -57,17 +55,16 @@ class Header extends Component {
               Carrito de compras
             </Link>
           </div>
-
-          {isSearcherEnable ?
-            <div style={{ float: "left", marginRight: "25px" }}>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Buscar"
-                onChange={e => this.props.palabraBuscador(e.target.value)}
-              />
-            </div>
-            : ""}
+          <div style={{ float: "left", marginRight: "25px" }}>
+            <input
+              id="searcher"
+              type="text"
+              
+              className="form-control d-none"
+              placeholder="Buscar"
+              onChange={e => this.props.palabraBuscador(e.target.value)}
+            />
+          </div>
 
         </div>
       </nav>
