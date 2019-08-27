@@ -18,6 +18,7 @@ class OrderUser extends React.Component {
   }
 
   onHandleDeleteItem = id => {
+    console.log(id);
     this.props.removeOrder(id);
     this.setState({
       ordersData: this.state.ordersData.filter(element => element._id != id)

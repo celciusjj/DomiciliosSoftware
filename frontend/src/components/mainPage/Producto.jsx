@@ -5,7 +5,8 @@ import { addProductToCar } from "../../actions/shopCarActions";
 class Producto extends Component {
   state = {
     counter: 0,
-    isAdd: false
+    isAdd: false,
+    situacional: ""
   };
 
   incrementCounterClick = () => {
@@ -24,7 +25,7 @@ class Producto extends Component {
   };
 
   addProductClick = () => {
-    const { counter } = this.state;
+    const { counter, situacional } = this.state;
     if (counter > 0) {
       const { name, price } = this.props;
 
@@ -39,20 +40,35 @@ class Producto extends Component {
 
       this.setState({
         isAdd: true,
-        counter: 0
+        counter: 0,
+        situacional: "producto agregado",
       });
 
-      alert("se agrego al carrito");
+      
       this.props.addProductToCar(productoCarrito);
     } else {
-      alert("selecciona la cantidad");
+      
+      this.setState({
+        situacional: "agregar cantidad",
+      });
     }
   };
 
   render() {
     const { name, description, url, price } = this.props;
+    const { situacional } = this.state;
     return (
       <div className="card mt-5 text-center" style={{ width: "220px" }}>
+
+        {situacional === "agregar cantidad" ?
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Ingrese cantidad
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          : ""}
+
         <img
           src={url}
           style={{ witdh: "100px", height: "100px" }}

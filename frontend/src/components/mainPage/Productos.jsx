@@ -5,32 +5,6 @@ import { connect } from "react-redux";
 import { mostrarProductos } from "../../actions/productActions";
 import Producto from "./Producto";
 
-const PRODUCTOS = [
-  {
-    name: "papa",
-    price: 2100,
-    quantity: 100,
-    description: "Papa buena",
-    availability: null,
-    url: ""
-  },
-  {
-    name: "Cilantro",
-    price: 2200,
-    quantity: 200,
-    description: "Papa que vueles",
-    availability: null,
-    url: ""
-  },
-  {
-    name: "Leche",
-    price: 2600,
-    quantity: 400,
-    description: "Leche sin hervir",
-    availability: null,
-    url: ""
-  }
-];
 
 class Productos extends Component {
   componentDidMount() {
@@ -44,7 +18,7 @@ class Productos extends Component {
   }
 
   state = {
-    arrayProductos: PRODUCTOS
+    arrayProductos: []
   };
 
   componentWillReceiveProps() {
@@ -72,7 +46,6 @@ class Productos extends Component {
   render() {
     return (
       <div>
-        <div className="alert alert-primary alertShow">Se agrego</div>
         <div className="d-flex justify-content-around flex-wrap">
           {this.state.arrayProductos.length > 0 ? (
             this.state.arrayProductos.map(producto => (

@@ -10,10 +10,3 @@ export const getOrders = () => async dyspatch => {
   });
 };
 
-export const deleteOrder = () => async dyspatch => {
-
-
-  dyspatch({
-    
-  })
-}

@@ -40,7 +40,7 @@ function deleteOrder(req, res) {
     const db = client.db(nameDB);
     db.collection(collectionName).deleteOne(
       {
-        id: id
+        orderPrice: parseInt(id)
       },
       (err, item) => {
         if (err) throw err;

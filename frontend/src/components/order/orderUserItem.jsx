@@ -16,10 +16,10 @@ class OrderUserItem extends React.Component {
               <p className="text-dark m-0">Precio total: {this.props.price}</p>
             </div>
             <br />
-            <div className="col-md-2">
+            <div className=" d-flex ">
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-primary mr-2"
                 onClick={this.onHandleOpenModal}
               >
                 Ver orden
