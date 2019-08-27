@@ -16,6 +16,11 @@ export default (state = initialState, action) => {
           product => product.id !== action.payload
         )
       };
+    case "ELIMINAR_PEDIDO":
+      return {
+        ...state,
+        shopCart: action.payload
+      }
     default:
       return state;
   }

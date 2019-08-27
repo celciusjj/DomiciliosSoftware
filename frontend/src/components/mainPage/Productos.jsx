@@ -5,8 +5,34 @@ import { connect } from "react-redux";
 import { mostrarProductos } from "../../actions/productActions";
 import Producto from "./Producto";
 
-class Productos extends Component {
+const PRODUCTOS = [
+  {
+    name: "papa",
+    price: 2100,
+    quantity: 100,
+    description: "Papa buena",
+    availability: null,
+    url: ""
+  },
+  {
+    name: "Cilantro",
+    price: 2200,
+    quantity: 200,
+    description: "Papa que vueles",
+    availability: null,
+    url: ""
+  },
+  {
+    name: "Leche",
+    price: 2600,
+    quantity: 400,
+    description: "Leche sin hervir",
+    availability: null,
+    url: ""
+  }
+];
 
+class Productos extends Component {
   componentDidMount() {
     this.props.mostrarProductos();
     var searcher = document.getElementById("searcher");
@@ -14,11 +40,11 @@ class Productos extends Component {
   }
 
   componentWillUnmount() {
-    document.getElementById("searcher").classList.remove('d-inline');
+    document.getElementById("searcher").classList.remove("d-inline");
   }
 
   state = {
-    arrayProductos: []
+    arrayProductos: PRODUCTOS
   };
 
   componentWillReceiveProps() {
@@ -48,9 +74,8 @@ class Productos extends Component {
       <div>
         <div className="alert alert-primary alertShow">Se agrego</div>
         <div className="d-flex justify-content-around flex-wrap">
-
-          {this.state.arrayProductos.length > 0
-            ? this.state.arrayProductos.map(producto => (
+          {this.state.arrayProductos.length > 0 ? (
+            this.state.arrayProductos.map(producto => (
               <Producto
                 key={producto._id}
                 name={producto.name}
@@ -60,7 +85,14 @@ class Productos extends Component {
                 url={producto.url}
               />
             ))
-            : <div className="alert alert-danger justify-content-center" style={{ position: "absolute", top: "50%", }}>No hay productos disponibles</div>}
+          ) : (
+            <div
+              className="alert alert-danger justify-content-center"
+              style={{ position: "absolute", top: "50%" }}
+            >
+              No hay productos disponibles
+            </div>
+          )}
         </div>
       </div>
     );

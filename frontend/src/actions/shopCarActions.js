@@ -21,3 +21,11 @@ export const addOrder = order => async dyspatch => {
     payload: respuesta
   });
 };
+
+export const removeOrder = id => async dyspatch => {
+  const respuesta = await Axios.delete(`http://localhost:4000/order/${id}`);
+  dyspatch({
+    type: "ELIMINAR_PEDIDO",
+    payload: respuesta.data
+  });
+};

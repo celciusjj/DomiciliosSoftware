@@ -6,12 +6,8 @@ function postOrder(req, res) {
     if (err) throw err;
     const db = client.db(nameDB);
     var data = {
-      order: [
-        {
-          orderPrice: req.body.orderPrice,
-          order: req.body.order
-        }
-      ]
+      orderPrice: req.body.orderPrice,
+      order: req.body.order
     };
     db.collection(collectionName).insertOne(data, (err, value) => {
       if (err) throw err;

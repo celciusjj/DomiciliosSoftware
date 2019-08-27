@@ -2,6 +2,7 @@ import React from "react";
 import OrderUserItem from "./orderUserItem";
 import { connect } from "react-redux";
 import { getOrders } from "../../actions/orderActions";
+import { removeOrder } from "../../actions/shopCarActions";
 
 class OrderUser extends React.Component {
   state = {
@@ -17,6 +18,7 @@ class OrderUser extends React.Component {
   }
 
   onHandleDeleteItem = id => {
+    this.props.removeOrder(id);
     this.setState({
       ordersData: this.state.ordersData.filter(element => element._id != id)
     });
@@ -49,5 +51,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getOrders }
+  { getOrders, removeOrder }
 )(OrderUser);

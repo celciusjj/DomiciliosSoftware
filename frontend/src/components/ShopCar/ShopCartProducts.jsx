@@ -15,13 +15,13 @@ const ShopCarProducts = props => {
 
   function makeOrderClick() {
     const { shopCart } = props;
-
-    const order = {
+    
+    const orderUser = {
       orderPrice: getTotalPrice(),
       order: shopCart
     };
 
-    props.addOrder(order);
+    props.addOrder(orderUser);
   }
 
   const { shopCart } = props;
@@ -40,15 +40,19 @@ const ShopCarProducts = props => {
           </div>
         </div>
         {shopCart.length === 0 ? (
-          <img style={{width: "60%", heigh: "60%"}} src="../../tigerProduct.png" alt="" />
+          <img
+            style={{ width: "60%", heigh: "60%" }}
+            src="../../tigerProduct.png"
+            alt=""
+          />
         ) : (
-            <button onClick={makeOrderClick} className=" btn btn-primary">
-              Realizar pedido por un valor total de{" "}
-              <span className="badge badge-warning text-dark h3">
-                $ {getTotalPrice()}
-              </span>
-            </button>
-          )}
+          <button onClick={makeOrderClick} className=" btn btn-primary">
+            Realizar pedido por un valor total de{" "}
+            <span className="badge badge-warning text-dark h3">
+              $ {getTotalPrice()}
+            </span>
+          </button>
+        )}
       </div>
     </React.Fragment>
   );
