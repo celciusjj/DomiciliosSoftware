@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Tabs from "../Tabs";
 
 // Redux
 import { connect } from "react-redux";

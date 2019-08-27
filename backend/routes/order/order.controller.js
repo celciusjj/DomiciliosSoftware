@@ -37,7 +37,35 @@ function getOrders(req, res) {
   });
 }
 
+function deleteOrder(req, res) {
+  const { id } = req.params;
+  client.connect(err => {
+    if (err) throw err;
+    const db = client.db(nameDB);
+    db.collection(collectionName).deleteOne(
+      {
+        id: id
+      },
+      (err, item) => {
+        if (err) throw err;
+        if (item.result.n > 0) {
+          res.status(200).send({
+            status: true,
+            message: "Eliminado con exito"
+          });
+        } else {
+          res.status(400).send({
+            status: false,
+            message: "No se encontro"
+          });
+        }
+      }
+    );
+  });
+}
+
 module.exports = {
   postOrder,
-  getOrders
+  getOrders,
+  deleteOrder
 };

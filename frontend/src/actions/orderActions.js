@@ -9,3 +9,11 @@ export const getOrders = () => async dyspatch => {
     payload: ordersData.data.data
   });
 };
+
+export const deleteOrder = () => async dyspatch => {
+
+
+  dyspatch({
+    
+  })
+}

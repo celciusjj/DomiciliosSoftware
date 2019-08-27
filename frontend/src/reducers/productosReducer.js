@@ -1,10 +1,4 @@
-import {
-  MOSTRAR_PRODUCTOS,
-  ELIMINAR_PRODUCTO,
-  AGREGAR_PRODUCTO,
-  MOSTRAR_PRODUCTO,
-  EDITAR_PRODUCTO
-} from "../actions/types";
+import { MOSTRAR_PRODUCTOS } from "../actions/types";
 
 const initialState = {
   productos: []

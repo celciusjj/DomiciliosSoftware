@@ -23,8 +23,6 @@ class Producto extends Component {
     }
   };
 
-
-
   addProductClick = () => {
     const { counter } = this.state;
     if (counter > 0) {
@@ -36,7 +34,7 @@ class Producto extends Component {
         name: name,
         counter: counter,
         totalPrice: totalPrice,
-        id: Math.floor((Math.random() * 1000) + 1)
+        id: Math.floor(Math.random() * 1000 + 1)
       };
 
       this.setState({
@@ -61,7 +59,6 @@ class Producto extends Component {
           className="card-img-top mt-2"
           alt="..."
         />
-
         <div className="card-body">
           <h5 style={{ fontWeight: "bold" }} className="card-title text-center">
             {name}
@@ -102,8 +99,6 @@ class Producto extends Component {
             Añadir al carrito{" "}
           </button>
         </div>
-
-        
       </div>
     );
   }
