@@ -15,7 +15,6 @@ const ShopCarProducts = props => {
 
   function makeOrderClick() {
     const { shopCart } = props;
-    
     const orderUser = {
       orderPrice: getTotalPrice(),
       order: shopCart

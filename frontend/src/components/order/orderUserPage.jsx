@@ -20,7 +20,7 @@ class OrderUser extends React.Component {
   onHandleDeleteItem = id => {
     this.props.removeOrder(id);
     this.setState({
-      ordersData: this.state.ordersData.filter(element => element._id != id)
+      ordersData: this.state.ordersData.filter(element => element.orderId !== id)
     });
   };
 
@@ -33,8 +33,8 @@ class OrderUser extends React.Component {
               <OrderUserItem
                 key={result._id}
                 price={result.orderPrice}
-                idItem={result._id}
-                deleteItem={this.onHandleDeleteItem.bind(this, result._id)}
+                idItem={result.orderId}
+                deleteItem={this.onHandleDeleteItem.bind(this, result.orderId)}
               ></OrderUserItem>
             ))
           : "No hay ordenes"}
