@@ -21,6 +21,11 @@ export default (state = initialState, action) => {
         ...state,
         shopCart: action.payload
       }
+    case "DELETE_ORDER":
+      return {
+        ...state,
+        shopCart: action.payload
+      }
     default:
       return state;
   }

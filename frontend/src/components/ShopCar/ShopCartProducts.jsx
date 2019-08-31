@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import ShopCarProduct from "./ShopCartProduct";
-import { addOrder } from "../../actions/shopCarActions";
+import { addOrder, deleteOrder } from "../../actions/shopCarActions";
+
 
 class ShopCartProducts extends React.Component {
   state = {
@@ -29,7 +30,8 @@ class ShopCartProducts extends React.Component {
     this.setState({
       isSend: "enviado"
     })
-    //this.props.history.push("/");
+
+    this.props.deleteOrder();
   }
 
   render() {
@@ -79,7 +81,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addOrder }
+  { addOrder, deleteOrder }
 )(ShopCartProducts);
 
 

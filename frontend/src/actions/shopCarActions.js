@@ -29,3 +29,11 @@ export const removeOrder = id => async dyspatch => {
     payload: respuesta.data
   });
 };
+
+export const deleteOrder = () => dyspatch => {
+  console.log("entra")
+  dyspatch({
+    type: "DELETE_ORDER",
+    payload: []
+  })
+}

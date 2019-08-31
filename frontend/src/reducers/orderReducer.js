@@ -11,6 +11,7 @@ export default (state = initialState, action) => {
         ...state,
         order: action.payload
       };
+
     default:
       return state;
   }
