@@ -11,7 +11,16 @@ export default (state = initialState, action) => {
         ...state,
         order: action.payload
       };
-
+    case "ELIMINAR_PEDIDO":
+      return {
+        ...state,
+        order: action.payload
+      };
+    case "DELETE_ORDER":
+      return {
+        ...state,
+        order: action.payload
+      };
     default:
       return state;
   }

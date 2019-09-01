@@ -19,6 +19,7 @@ postProduct = (req, res) => {
     if (err) throw err;
     const db = client.db(nameDB);
     var data = {
+      productId: req.body.productId,
       name: req.body.name,
       price: req.body.price,
       quantity: req.body.quantity,

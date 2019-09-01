@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addProductToCar } from "../../actions/shopCarActions";
 
 class Producto extends Component {
   state = {
@@ -25,31 +23,31 @@ class Producto extends Component {
   };
 
   addProductClick = () => {
-    const { counter, situacional } = this.state;
+    const { counter } = this.state;
     if (counter > 0) {
-      const { name, price } = this.props;
+      let { name, price } = this.props;
+      let totalPrice = price * counter;
+      let itemsShopCart = JSON.parse(localStorage.getItem("shopCart"));
 
-      const totalPrice = price * counter;
-
-      const productoCarrito = {
+      let productoCarrito = {
         name: name,
         counter: counter,
         totalPrice: totalPrice,
-        id: Math.floor(Math.random() * 1000 + 1)
+        id: itemsShopCart ? itemsShopCart.length + 1 : 1
       };
+
+      if (itemsShopCart) itemsShopCart.push(productoCarrito);
+      else itemsShopCart = [productoCarrito];
+      localStorage.setItem("shopCart", JSON.stringify(itemsShopCart));
 
       this.setState({
         isAdd: true,
         counter: 0,
-        situacional: "producto agregado",
+        situacional: "producto agregado"
       });
-
-
-      this.props.addProductToCar(productoCarrito);
     } else {
-
       this.setState({
-        situacional: "agregar cantidad",
+        situacional: "agregar cantidad"
       });
     }
   };
@@ -59,17 +57,17 @@ class Producto extends Component {
     const { situacional } = this.state;
     return (
       <div className="card mt-5 text-center" style={{ width: "220px" }}>
-
-        {situacional === "agregar cantidad" ?
+        {situacional === "agregar cantidad" ? (
           <div class="alert alert-warning text-center" role="alert">
             Ingrese cantidad
           </div>
-          : situacional === "producto agregado" ?
-            <div class="alert alert-success text-center" role="alert">
-              Producto agregado
-         </div>
-
-            : ""}
+        ) : situacional === "producto agregado" ? (
+          <div class="alert alert-success text-center" role="alert">
+            Producto agregado
+          </div>
+        ) : (
+          ""
+        )}
 
         <img
           src={url}
@@ -122,7 +120,4 @@ class Producto extends Component {
   }
 }
 
-export default connect(
-  null,
-  { addProductToCar }
-)(Producto);
+export default Producto;

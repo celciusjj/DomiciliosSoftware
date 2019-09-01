@@ -4,8 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { mostrarProductos } from "../../actions/productActions";
 import Producto from "./Producto";
-import Spinner from 'react-bootstrap/Spinner'
-
+import Spinner from "react-bootstrap/Spinner";
 
 class Productos extends Component {
   componentDidMount() {
@@ -51,7 +50,7 @@ class Productos extends Component {
           {this.state.arrayProductos.length > 0 ? (
             this.state.arrayProductos.map(producto => (
               <Producto
-                key={producto._id}
+                key={producto.productId}
                 name={producto.name}
                 price={producto.price}
                 description={producto.description}
@@ -60,11 +59,12 @@ class Productos extends Component {
               />
             ))
           ) : (
-
-            <div className="text-center justify-content-center align-middle" style={{ position: "absolute", top: "50%" }}>
-            <Spinner animation="border" style={{ margin: "auto" }} />
+            <div
+              className="text-center justify-content-center align-middle"
+              style={{ position: "absolute", top: "50%" }}
+            >
+              <Spinner animation="border" style={{ margin: "auto" }} />
             </div>
-
           )}
         </div>
       </div>

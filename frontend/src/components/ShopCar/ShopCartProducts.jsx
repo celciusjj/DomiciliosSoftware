@@ -1,26 +1,37 @@
 import React from "react";
 import { connect } from "react-redux";
 import ShopCarProduct from "./ShopCartProduct";
-import { addOrder, deleteOrder } from "../../actions/shopCarActions";
-
+import { addOrder } from "../../actions/orderActions";
 
 class ShopCartProducts extends React.Component {
   state = {
-    isSend: ''
-  }
-
+    isSend: "",
+    products: localStorage.getItem("shopCart")
+      ? JSON.parse(localStorage.getItem("shopCart"))
+      : []
+  };
 
   getTotalPrice = () => {
-    const { shopCart } = this.props;
-    let totalValueOfOrder = 0;
-    for (let i = 0; i < shopCart.length; i++) {
-      totalValueOfOrder = shopCart[i].totalPrice + totalValueOfOrder;
+    const { products } = this.state;
+    if (products) {
+      let totalValueOfOrder = 0;
+      for (let i = 0; i < products.length; i++) {
+        totalValueOfOrder = products[i].totalPrice + totalValueOfOrder;
+      }
+      return totalValueOfOrder;
     }
-    return totalValueOfOrder;
+    return [];
+  };
+
+  deleteItem = id => {
+    let productsLocal = JSON.parse(localStorage.getItem("shopCart"));
+    productsLocal = productsLocal.filter(element => element.id !== id);
+    localStorage.setItem("shopCart", JSON.stringify(productsLocal));
+    this.setState({ products: JSON.parse(localStorage.getItem("shopCart")) });
   };
 
   makeOrderClick = () => {
-    var { shopCart } = this.props;
+    var { shopCart } = this.state;
     const orderUser = {
       orderPrice: this.getTotalPrice(),
       order: shopCart
@@ -29,65 +40,58 @@ class ShopCartProducts extends React.Component {
     this.props.addOrder(orderUser);
     this.setState({
       isSend: "enviado"
-    })
-
-    this.props.deleteOrder();
-  }
+    });
+    localStorage.removeItem("shopCart");
+  };
 
   render() {
-    const { shopCart } = this.props;
-    const { isSend } = this.state;
+    const { isSend, products } = this.state;
     return (
       <div className="text-center mt-2 mr-5">
         <h2 className="text-center my-5">Su pedido</h2>
         <div className="row justify-content-center">
           <div className="col-md-8">
             <ul>
-              {shopCart.length > 0 ? shopCart.map(product => (
-                <ShopCarProduct key={product.name} info={product} />
-              )) : null}
+              {products.length > 0
+                ? products.map(product => (
+                    <ShopCarProduct
+                      key={product.name}
+                      info={product}
+                      deleteItem={this.deleteItem}
+                    />
+                  ))
+                : null}
             </ul>
           </div>
         </div>
-        {shopCart.length === 0 ? (
+        {products.length === 0 ? (
           <img
             style={{ width: "60%", heigh: "60%" }}
             src="../../tigerProduct.png"
             alt=""
           />
         ) : (
-            <button onClick={this.makeOrderClick} className=" btn btn-primary">
-              Realizar pedido por un valor total de{" "}
-              <span className="badge badge-warning text-dark h3">
-                $ {this.getTotalPrice()}
-              </span>
-            </button>
-          )}
+          <button onClick={this.makeOrderClick} className=" btn btn-primary">
+            Realizar pedido por un valor total de{" "}
+            <span className="badge badge-warning text-dark h3">
+              $ {this.getTotalPrice()}
+            </span>
+          </button>
+        )}
 
-        {isSend == "enviado" ?
-          <div className="alert alert-success text-center mt-5">Pedido enviado</div>
-          : ""}
+        {isSend === "enviado" ? (
+          <div className="alert alert-success text-center mt-5">
+            Pedido enviado
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
-
 }
 
-const mapStateToProps = state => ({
-
-  shopCart: state.shopCart.shopCart
-
-});
-
 export default connect(
-  mapStateToProps,
-  { addOrder, deleteOrder }
+  null,
+  { addOrder }
 )(ShopCartProducts);
-
-
-
-
-
-
-
-

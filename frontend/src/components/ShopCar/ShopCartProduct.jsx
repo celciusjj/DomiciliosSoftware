@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { removeProductToCar } from "../../actions/shopCarActions";
 
 class ShopCartProduct extends Component {
   deleteClick = () => {
     const { id } = this.props.info;
-    this.props.removeProductToCar(id);
+    this.props.deleteItem(id);
   };
 
   render() {
@@ -37,7 +35,4 @@ class ShopCartProduct extends Component {
   }
 }
 
-export default connect(
-  null,
-  { removeProductToCar }
-)(ShopCartProduct);
+export default ShopCartProduct;

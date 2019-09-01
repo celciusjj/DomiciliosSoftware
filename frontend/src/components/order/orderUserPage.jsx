@@ -1,12 +1,11 @@
 import React from "react";
 import OrderUserItem from "./orderUserItem";
 import { connect } from "react-redux";
-import { getOrders } from "../../actions/orderActions";
-import { removeOrder } from "../../actions/shopCarActions";
+import { getOrders, removeOrder } from "../../actions/orderActions";
 
 class OrderUser extends React.Component {
   state = {
-    ordersData: []
+    ordersData: [],
   };
 
   componentWillMount() {
@@ -14,14 +13,17 @@ class OrderUser extends React.Component {
   }
 
   componentWillReceiveProps() {
-    this.setState({ ordersData: this.props.orderUser });
+    if (this.state.ordersData.length === 0) {
+      this.setState({ ordersData: this.props.orderUser });
+    }
   }
 
   onHandleDeleteItem = id => {
-    console.log(id);
     this.props.removeOrder(id);
     this.setState({
-      ordersData: this.state.ordersData.filter(element => element.orderId !== id)
+      ordersData: this.state.ordersData.filter(
+        element => element.orderId !== id
+      )
     });
   };
 

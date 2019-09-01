@@ -10,7 +10,7 @@ function postOrder(req, res) {
       .toArray((err, value) => {
         if (err) throw err;
         var data = {
-          orderId: value.length + 1,
+          orderId: value[value.length - 1].orderId + 1,
           orderPrice: req.body.orderPrice,
           order: req.body.order
         };

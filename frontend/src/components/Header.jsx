@@ -6,19 +6,17 @@ import { mostrarProductos } from "../actions/productActions";
 import { getOrders } from "../actions/orderActions";
 
 class Header extends Component {
-
-
   onClickPedidos = () => {
     this.setState({
-      isSearcherEnable: false,
-    })
-  }
+      isSearcherEnable: false
+    });
+  };
 
   onClickProductos = () => {
     this.setState({
-      isSearcherEnable: true,
-    })
-  }
+      isSearcherEnable: true
+    });
+  };
 
   render() {
     this.props.getOrders();
@@ -27,12 +25,12 @@ class Header extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between  d-flex">
         <div className="d-flex flex-row">
-          <Link onClick={this.onClickProductos} to={"/"} className="text-light p-2">
+          <Link
+            onClick={this.onClickProductos}
+            to={"/"}
+            className="text-light p-2"
+          >
             Productos
-          </Link>
-          <Link to={"/"} className="text-light p-2 ">
-            Pedidos
-
           </Link>
           <Link to={"/"} className="text-light p-2 ">
             Despachadores
@@ -68,13 +66,11 @@ class Header extends Component {
             <input
               id="searcher"
               type="text"
-              
               className="form-control d-none"
               placeholder="Buscar"
               onChange={e => this.props.palabraBuscador(e.target.value)}
             />
           </div>
-
         </div>
       </nav>
     );
