@@ -31,10 +31,10 @@ class ShopCartProducts extends React.Component {
   };
 
   makeOrderClick = () => {
-    var { shopCart } = this.state;
+    var { products } = this.state;
     const orderUser = {
       orderPrice: this.getTotalPrice(),
-      order: shopCart
+      order: products
     };
 
     this.props.addOrder(orderUser);
