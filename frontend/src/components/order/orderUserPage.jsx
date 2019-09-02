@@ -10,6 +10,7 @@ class OrderUser extends React.Component {
 
   componentWillMount() {
     this.props.getOrders();
+    //console.log()
   }
 
   componentWillReceiveProps() {
@@ -30,10 +31,11 @@ class OrderUser extends React.Component {
   render() {
     return (
       <div className="text-center mt-2 mr-5">
-        <h2 className="text-center my-5">Mis pedidos</h2>
+        <h2 className="text-center my-5 justify-content-center">Mis pedidos</h2>
         {this.state.ordersData.length > 0
           ? this.state.ordersData.map(result => (
               <OrderUserItem
+                products={result.order}
                 key={result._id}
                 price={result.orderPrice}
                 idItem={result.orderId}
