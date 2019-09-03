@@ -7,7 +7,6 @@ const collectionName = "users";
 function addUser(req, res) {
   let { name, email, password, address, role } = req.body;
 
-
   if (name && email && password && address) {
     client.connect(err => {
       if (err) throw err;

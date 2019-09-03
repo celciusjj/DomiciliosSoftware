@@ -2,24 +2,43 @@ const { client, nameDB } = require("../utils/mongoConf");
 const collectionName = "orders";
 
 function postOrder(req, res) {
-  client.connect(err => {
-    if (err) throw err;
-    const db = client.db(nameDB);
-    db.collection(collectionName)
-      .find()
-      .toArray((err, value) => {
-        if (err) throw err;
-        var data = {
-          orderId: value[value.length - 1].orderId + 1,
-          orderPrice: req.body.orderPrice,
-          order: req.body.order
-        };
-        db.collection(collectionName).insertOne(data, (err, value) => {
+  let { orderPrice, order } = req.body;
+
+  if (orderPrice && order) {
+    client.connect(err => {
+      if (err) throw err;
+      const db = client.db(nameDB);
+      db.collection(collectionName)
+        .find()
+        .toArray((err, value) => {
           if (err) throw err;
-          res.status(201).send({ product: value.ops[0] });
+          let data;
+          if (value.length > 0) {
+            data = {
+              orderId: value[value.length - 1].orderId + 1,
+              orderPrice: orderPrice,
+              order: order
+            };
+          } else {
+            data = {
+              orderId: 1,
+              orderPrice: orderPrice,
+              order: order
+            };
+          }
+
+          db.collection(collectionName).insertOne(data, (err, value) => {
+            if (err) throw err;
+            res.status(201).send({
+              product: value.ops[0],
+              message: "Prodcutos devueltos con exito"
+            });
+          });
         });
-      });
-  });
+    });
+  } else {
+    res.status(400).send({ product: [], message: "Campos incompletos" });
+  }
 }
 
 function getOrders(req, res) {
