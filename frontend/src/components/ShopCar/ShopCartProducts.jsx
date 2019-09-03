@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import ShopCarProduct from "./ShopCartProduct";
-import { addOrder } from "../../actions/orderActions";
+import { addOrder, getOrders } from "../../actions/orderActions";
 
 class ShopCartProducts extends React.Component {
   state = {
@@ -38,6 +38,7 @@ class ShopCartProducts extends React.Component {
     };
 
     this.props.addOrder(orderUser);
+    this.props.getOrders();
     this.setState({
       isSend: "enviado"
     });
@@ -93,5 +94,5 @@ class ShopCartProducts extends React.Component {
 
 export default connect(
   null,
-  { addOrder }
+  { addOrder, getOrders }
 )(ShopCartProducts);

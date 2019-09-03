@@ -5,12 +5,11 @@ import { getOrders, removeOrder } from "../../actions/orderActions";
 
 class OrderUser extends React.Component {
   state = {
-    ordersData: [],
+    ordersData: []
   };
 
   componentWillMount() {
     this.props.getOrders();
-    //console.log()
   }
 
   componentWillReceiveProps() {
@@ -20,11 +19,12 @@ class OrderUser extends React.Component {
   }
 
   onHandleDeleteItem = id => {
-    this.props.removeOrder(id);
-    this.setState({
-      ordersData: this.state.ordersData.filter(
-        element => element.orderId !== id
-      )
+    this.props.removeOrder(id).then(() => {
+      this.setState({
+        ordersData: this.state.ordersData.filter(
+          element => element.orderId !== id
+        )
+      });
     });
   };
 
