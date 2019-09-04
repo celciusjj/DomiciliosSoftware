@@ -11,15 +11,15 @@ Este es un proyecto que involucra el proceso de ventas de productos.
 Consiste en un sistema de domicilios donde un cliente realiza su carrito de compras y realiza su pedido a la empresa que hizo adquisición de la aplicación.
 
 
-# Getting Started
+## Getting Started
 Para instalar la aplicacion haz git clone del link de repositorio.
 Luego entra a la carpeta frontend y backend y ejeuta el comando npm install
 Luego para ejecutar el fronted copia npm start, analogamente para el backend ejecuta nodemon server.js
 
-# Prerequisites
+## Prerequisites
 Las dependencias para el fronted y el backend que se agregan con el comando npm install en ambas carpetas
 
-# Give examples
+## Give examples
 >> npm install
 >> npm start //Para el fronted
 
@@ -27,7 +27,7 @@ Las dependencias para el fronted y el backend que se agregan con el comando npm 
 >> nodemon server.js //
 
 
-# Give the example
+## Give the example
 And repeat
 
 until finished
@@ -36,15 +36,15 @@ End with an example of getting some data out of the system or using it for a lit
 #Running the tests
 Para correr los test ejecuta el comando: >>run test
 
-# Built With
+## Built With
 React 
 Nodejs
 
 
-# Authors
+## Authors
 Juan José Carmona
 Andres García
 Daniel Berrío Barrera
 
-# License
+## License
 Este proyecto esta bajo la licencia del MIT (This project is licensed under the MIT License - see the LICENSE.md file for details)
