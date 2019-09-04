@@ -17,3 +17,18 @@ Para poder ejecutar el frontend y el backend se deben ejecutar los comandos en c
 Una vez instalados todos los paquetes de npm dentro de cada proyecto se procede a ejecutar los siguientes comandos:
 >> npm start //Para empezar el renderizado del frontend
 >> nodemon server.js //Para ejecutar el backend
+
+## Ejecutando los test
+Para ejecutar los test en nuestro proyecto ejecutamos el comando npm run test, en este caso para el frontend.
+
+## Contruido en:
+React 
+Nodejs
+
+## Authors
+Juan José Carmona Montes
+Andres García 
+Daniel Berrío Barrera
+
+## License
+This project is licensed under the MIT License - see the LICENSE.md file for details
