@@ -15,8 +15,8 @@ Nuestro objetivo es conseguir la satisfaccion de los clientes capacitandoles un 
 Para poder ejecutar el frontend y el backend se deben ejecutar los comandos en cada una de las carpetas correspondientes:
 >> npm install
 Una vez instalados todos los paquetes de npm dentro de cada proyecto se procede a ejecutar los siguientes comandos:
->> npm start //Para empezar el renderizado del frontend
->> nodemon server.js //Para ejecutar el backend
+- >> npm start //Para empezar el renderizado del frontend
+- >>nodemon server.js //Para ejecutar el backend
 
 ## Ejecutando los test
 Para ejecutar los test en nuestro proyecto ejecutamos el comando npm run test, en este caso para el frontend.
