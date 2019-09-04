@@ -22,7 +22,7 @@ Una vez instalados todos los paquetes de npm dentro de cada proyecto se procede 
 Para ejecutar los test en nuestro proyecto ejecutamos el comando npm run test, en este caso para el frontend.
 
 ## Contruido en:
-React 
+React ---  
 Nodejs
 
 ## Authors
