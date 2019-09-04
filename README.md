@@ -26,9 +26,9 @@ React ---
 Nodejs
 
 ## Authors
-Juan José Carmona Montes
-Andres García 
-Daniel Berrío Barrera
+- Juan José Carmona Montes
+- Andres García 
+- Daniel Berrío Barrera
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
