@@ -29,6 +29,7 @@ function addUser(req, res) {
               addUser,
               role
             };
+            console.log("Entra a la");
             database
               .collection(collectionName)
               .insertOne(data, (err, value) => {

@@ -24,9 +24,10 @@ class Registro extends Component {
     return false;
   }
 
-  comprobarRadioButton = () => {
+  comprobarRadioButton = e => {
+    e.preventDefault();
 
-    const { contrasena, contrasenaConfirm} = this.state;
+    const { contrasena, contrasenaConfirm } = this.state;
 
     let radioUsuario = document.getElementById("radioUsuario").checked;
     let radioDespachador = document.getElementById("radioDespachador").checked;
@@ -56,6 +57,7 @@ class Registro extends Component {
       if (contrasena === contrasenaConfirm) {
         if (emailExpression.test(this.state.correo)) {
           if (this.checkPassword()) {
+            console.log("Could execute the promise");
             ApiCall.addUser({
               name: this.state.nombre,
               email: this.state.correo,
@@ -67,6 +69,7 @@ class Registro extends Component {
               .then(result => {
                 if (result.status) {
                   console.log(result.message);
+
                   this.setState({
                     nombre: "",
                     correo: "",
@@ -102,7 +105,7 @@ class Registro extends Component {
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <form onSubmit={this.nuevoProducto}>
+              <form onSubmit={this.comprobarRadioButton}>
                 <div className="form-group">
                   <input
                     onChange={e => this.setState({ nombre: e.target.value })}
@@ -167,7 +170,10 @@ class Registro extends Component {
                           id="radioUsuario"
                           name="groupOfDefaultRadios"
                         />
-                        <label className="custom-control-label" htmlFor="radioUsuario">
+                        <label
+                          className="custom-control-label"
+                          htmlFor="radioUsuario"
+                        >
                           Usuario
                         </label>
                       </div>
@@ -196,32 +202,20 @@ class Registro extends Component {
                           id="radioAdmin"
                           name="groupOfDefaultRadios"
                         />
-                        <label className="custom-control-label" htmlFor="radioAdmin">
+                        <label
+                          className="custom-control-label"
+                          htmlFor="radioAdmin"
+                        >
                           Administrador
                         </label>
                       </div>
                     </div>
                   </div>
                 </div>
-                <button
-                  onClick={this.comprobarRadioButton}
-                  type="submit"
-                  className="btn btn-primary font-weight-bold text-uppercase d-block w-100 mt-4"
-                >
+                <button className="btn btn-primary font-weight-bold text-uppercase d-block w-100 mt-4">
                   Registrarse
                 </button>
               </form>
-
-              {rol ? (
-                <div className="font-weight-bold alert alert-danger text-center mt-4">
-                  <input
-                    onChange={this.precioProducto}
-                    type="text"
-                    className="form-control mt-4"
-                    placeholder="Ingrese su codigo"
-                  />
-                </div>
-              ) : null}
             </div>
           </div>
         </div>
