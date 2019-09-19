@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { palabraBuscador } from "../actions/searcherAction";
 import { mostrarProductos } from "../actions/productActions";
 import { getOrders } from "../actions/orderActions";
+import { NavDropdown } from "react-bootstrap";
 
 class Header extends Component {
   onClickPedidos = () => {
@@ -16,6 +17,11 @@ class Header extends Component {
     this.setState({
       isSearcherEnable: true
     });
+  };
+
+  handleClickSignOut = () => {
+    localStorage.removeItem("domicilio");
+    this.props.history.push("/");
   };
 
   render() {
@@ -40,12 +46,37 @@ class Header extends Component {
         <div>
           <div style={{ float: "right", marginTop: "5px" }}>
             <Link
+              hidden={localStorage.getItem("domicilio") ? true : false}
               to={"/login/"}
               className="text-light mr-5"
               style={{ float: "right" }}
             >
               Iniciar Sesión
             </Link>
+            <div
+              hidden={localStorage.getItem("domicilio") ? false : true}
+              style={{
+                float: "right"
+              }}
+              className="text-light mr-5"
+            >
+              <NavDropdown
+                title={
+                  localStorage.getItem("domicilio") ? (
+                    <h6 style={{ color: "white", float: "left" }}>
+                      {JSON.parse(localStorage.getItem("domicilio"))[0].name}
+                    </h6>
+                  ) : null
+                }
+                id="collasible-nav-dropdown"
+                alignRight={true}
+                style={{ fontSize: "18px" }}
+              >
+                <NavDropdown.Item onClick={this.handleClickSignOut}>
+                  Cerrar sesión
+                </NavDropdown.Item>
+              </NavDropdown>
+            </div>
             <Link
               to={"/orderUser/"}
               className="text-light mr-5"

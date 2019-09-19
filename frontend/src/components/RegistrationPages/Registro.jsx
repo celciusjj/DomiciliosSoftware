@@ -57,7 +57,6 @@ class Registro extends Component {
       if (contrasena === contrasenaConfirm) {
         if (emailExpression.test(this.state.correo)) {
           if (this.checkPassword()) {
-            console.log("Could execute the promise");
             ApiCall.addUser({
               name: this.state.nombre,
               email: this.state.correo,
@@ -68,8 +67,6 @@ class Registro extends Component {
               .then(res => res.json())
               .then(result => {
                 if (result.status) {
-                  console.log(result.message);
-
                   this.setState({
                     nombre: "",
                     correo: "",

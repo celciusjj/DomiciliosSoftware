@@ -29,38 +29,37 @@ class Login extends Component {
               contrasena: "",
               error: ""
             });
+            this.props.history.push("/");
           } else {
             console.log(result.message);
             this.setState({
               error: "usuario no encontrado"
-            })
+            });
           }
         });
     } else {
       this.setState({
         error: "ingresa todos los campos"
-      })
+      });
     }
   };
 
   render() {
     const { error } = this.state;
     return (
-
-
       <div className="row justify-content-center mt-5">
         <div className="col-md-5">
-          {
-            error === "ingresa todos los campos" ?
-              <div className='font-weight-bold alert alert-danger text-center mt-4'>
-                Ingresa todos los campos
-          </div>
-              : error === "usuario no encontrado" ?
-                <div className='font-weight-bold alert alert-danger text-center mt-4'>
-                  Usuario no encontrado
-         </div>
-                : ""
-          }
+          {error === "ingresa todos los campos" ? (
+            <div className="font-weight-bold alert alert-danger text-center mt-4">
+              Ingresa todos los campos
+            </div>
+          ) : error === "usuario no encontrado" ? (
+            <div className="font-weight-bold alert alert-danger text-center mt-4">
+              Usuario no encontrado
+            </div>
+          ) : (
+            ""
+          )}
           <div className="card">
             <div className="card-body">
               <h2 className="text-center">Unete y compra nuestros productos</h2>

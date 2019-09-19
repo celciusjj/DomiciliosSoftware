@@ -19,7 +19,7 @@ class App extends React.Component {
       <Provider store={store}>
         <Router>
           <React.Fragment>
-            <Header />
+            <Route path="/" component={Header} />
             <div className="container">
               <Switch>
                 <Route exact path="/login/" component={Login} />
