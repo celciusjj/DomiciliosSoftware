@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ApiCall from "../../APICalls/users";
 
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -33,13 +33,13 @@ class Login extends Component {
           } else {
             console.log(result.message);
             this.setState({
-              error: "usuario no encontrado"
+              error: "Usuario no encontrado"
             });
           }
         });
     } else {
       this.setState({
-        error: "ingresa todos los campos"
+        error: "Ingresa todos los campos"
       });
     }
   };
@@ -83,18 +83,21 @@ class Login extends Component {
               </div>
               <button
                 onClick={this.onHandleSignIn}
+                id="buttonLogIn"
                 className="btn btn-primary font-weight-bold text-uppercase d-block w-100"
               >
                 Iniciar sesión
               </button>
               <h6 className="text-center mt-4">¿No tienes una cuenta? </h6>
-              <Link
-                to="/registro/"
-                type="submit"
-                className="btn btn-primary font-weight-bold text-uppercase d-block w-100"
-              >
-                Registrarse
-              </Link>
+              <BrowserRouter>
+                <Link
+                  to="/registro/"
+                  type="submit"
+                  className="btn btn-primary font-weight-bold text-uppercase d-block w-100"
+                >
+                  Registrarse
+                </Link>
+              </BrowserRouter>
             </div>
           </div>
         </div>
