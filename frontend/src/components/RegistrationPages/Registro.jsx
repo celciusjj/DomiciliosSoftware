@@ -11,7 +11,8 @@ class Registro extends Component {
     contrasena: "",
     contrasenaConfirm: "",
     rol: "",
-    direccion: ""
+    direccion: "",
+    error: ""
   };
 
   checkPassword() {
@@ -80,26 +81,56 @@ class Registro extends Component {
                 }
               });
           } else {
+            this.setState({
+              error: "contraseña invalida"
+            });
             console.log(
               "Contraseña inválida, recuerda que la contraseña debe tener al menos 8 digitos y contener una mayúscula y minúscula"
             );
           }
         } else {
+          this.setState({
+            error: "correo invalido"
+          });
           console.log("El correo electrónico no es válido");
         }
       } else {
+        this.setState({
+          error: "contraseñas no coinciden"
+        });
         console.log("Las contraseñas no coinciden");
       }
     } else {
+      this.setState({
+        error: "faltan campos"
+      });
       console.log("Faltan campos por ingresar");
     }
   };
 
   render() {
-    const { rol } = this.state;
+    const { rol, error } = this.state;
     return (
       <div className="row justify-content-center mt-5">
         <div className="col-md-6">
+              {error === "contraseña invalida" ? 
+                <div className="font-weight-bold alert alert-danger text-center mt-4">
+                  Contraseña inválida, recuerda que la contraseña debe tener al menos 8 digitos y contener una mayúscula y minúscula
+                </div>
+              : error === "correo invalido" ?
+                  <div className="font-weight-bold alert alert-danger text-center mt-4">
+                    El correo electrónico no es válido
+                  </div>
+              : error === "contraseñas no coinciden" ?
+                  <div className="font-weight-bold alert alert-danger text-center mt-4">
+                    Las contraseñas no coinciden
+                  </div>
+              : error === "faltan campos" ?
+                  <div className="font-weight-bold alert alert-danger text-center mt-4">
+                      Faltan campos por ingresar
+                  </div>
+              : ""
+              }
           <div className="card">
             <div className="card-body">
               <form onSubmit={this.comprobarRadioButton}>
