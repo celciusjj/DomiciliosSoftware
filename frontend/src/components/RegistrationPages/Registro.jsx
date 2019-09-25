@@ -84,27 +84,21 @@ class Registro extends Component {
             this.setState({
               error: "contraseña invalida"
             });
-            console.log(
-              "Contraseña inválida, recuerda que la contraseña debe tener al menos 8 digitos y contener una mayúscula y minúscula"
-            );
           }
         } else {
           this.setState({
             error: "correo invalido"
           });
-          console.log("El correo electrónico no es válido");
         }
       } else {
         this.setState({
           error: "contraseñas no coinciden"
         });
-        console.log("Las contraseñas no coinciden");
       }
     } else {
       this.setState({
         error: "faltan campos"
       });
-      console.log("Faltan campos por ingresar");
     }
   };
 
