@@ -33,13 +33,13 @@ class Login extends Component {
           } else {
             console.log(result.message);
             this.setState({
-              error: "Usuario no encontrado"
+              error: "usuario no encontrado"
             });
           }
         });
     } else {
       this.setState({
-        error: "Ingresa todos los campos"
+        error: "ingresa todos los campos"
       });
     }
   };
@@ -89,7 +89,6 @@ class Login extends Component {
                 Iniciar sesión
               </button>
               <h6 className="text-center mt-4">¿No tienes una cuenta? </h6>
-              <BrowserRouter>
                 <Link
                   to="/registro/"
                   type="submit"
@@ -97,7 +96,6 @@ class Login extends Component {
                 >
                   Registrarse
                 </Link>
-              </BrowserRouter>
             </div>
           </div>
         </div>
