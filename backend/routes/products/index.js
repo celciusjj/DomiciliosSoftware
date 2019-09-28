@@ -1,8 +1,11 @@
 const express = require("express");
-const routes = express.Router();
+const router = express.Router();
 const controller = require("./product.controller");
+const { validateToken } = require("../utils/auth");
 
-routes.get("/product", controller.retrieveProducts);
-routes.post("/product/add", controller.postProduct);
+router.get("/product", controller.retrieveProducts);
+router.post("/product/add", validateToken, controller.postProduct);
+router.put("/product/:productId", validateToken, controller.editProduct);
+router.delete("/product/:productId", validateToken, controller.deleteProduct);
 
-module.exports = routes;
+module.exports = router;

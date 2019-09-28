@@ -63,8 +63,10 @@ function authUser(req, res) {
       const database = client.db(nameDB);
       database.collection(collectionName).findOne(
         {
-          email: email,
-          password: crypto.createHmac("sha256", password).digest("hex")
+          $and: [
+            { email: email },
+            { password: crypto.createHmac("sha256", password).digest("hex") }
+          ]
         },
         (err, value) => {
           if (err) throw err;
