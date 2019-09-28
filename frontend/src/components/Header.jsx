@@ -30,7 +30,8 @@ class Header extends Component {
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between  d-flex">
-        <div className="d-flex flex-row">
+
+        <div className="d-flex flex-row">  
           <Link
             onClick={this.onClickProductos}
             to={"/"}
@@ -60,23 +61,8 @@ class Header extends Component {
               }}
               className="text-light mr-5"
             >
-              <NavDropdown
-                title={
-                  localStorage.getItem("domicilio") ? (
-                    <h6 style={{ color: "white", float: "left" }}>
-                      {JSON.parse(localStorage.getItem("domicilio"))[0].name}
-                    </h6>
-                  ) : null
-                }
-                id="collasible-nav-dropdown"
-                alignRight={true}
-                style={{ fontSize: "18px" }}
-              >
-                <NavDropdown.Item onClick={this.handleClickSignOut}>
-                  Cerrar sesión
-                </NavDropdown.Item>
-              </NavDropdown>
             </div>
+
             <Link
               to={"/orderUser/"}
               className="text-light mr-5"
@@ -103,6 +89,25 @@ class Header extends Component {
             />
           </div>
         </div>
+        <NavDropdown
+              title={
+                localStorage.getItem("domicilio") ? (
+                  <h6 style={{ color: "white", float: "left" }}>
+                    {JSON.parse(localStorage.getItem("domicilio"))[0].name}
+                  </h6>
+                ) : null
+              }
+              id="collasible-nav-dropdown"
+              alignRight={true}
+              style={{ fontSize: "18px" }}
+              >
+              <Link to="/crud/">
+              Gestionar Productos
+              </Link>
+              <NavDropdown.Item onClick={this.handleClickSignOut}>
+                Cerrar sesión
+              </NavDropdown.Item>
+        </NavDropdown>
       </nav>
     );
   }

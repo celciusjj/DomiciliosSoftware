@@ -4,6 +4,9 @@ import Registro from "./components/RegistrationPages/Registro";
 import Login from "./components/RegistrationPages/Login";
 import Carrito from "./components/ShopCar/ShopCartProducts";
 import OrderUser from "./components/order/orderUserPage";
+import Crud from './components/productManagement/Crud'
+import AddProduct from './components/productManagement/AddProduct'
+import EditProduct from './components/productManagement/EditProduct'
 //router
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -27,6 +30,9 @@ class App extends React.Component {
                 <Route exact path="/registro/" component={Registro} />
                 <Route exact path="/carrito/" component={Carrito} />
                 <Route exact path="/orderUser/" component={OrderUser} />
+                <Route exact path="/crud/" component={Crud}/>
+                <Route exact path="/create/" component={AddProduct}/>
+                <Route exact path="/edit/:id" component={EditProduct}/>
               </Switch>
             </div>
           </React.Fragment>
