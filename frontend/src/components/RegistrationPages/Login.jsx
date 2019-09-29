@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ApiCall from "../../APICalls/users";
 
-import { Link, BrowserRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -89,13 +89,13 @@ class Login extends Component {
                 Iniciar sesión
               </button>
               <h6 className="text-center mt-4">¿No tienes una cuenta? </h6>
-                <Link
-                  to="/registro/"
-                  type="submit"
-                  className="btn btn-primary font-weight-bold text-uppercase d-block w-100"
-                >
-                  Registrarse
-                </Link>
+              <Link
+                to="/registro/"
+                type="submit"
+                className="btn btn-primary font-weight-bold text-uppercase d-block w-100"
+              >
+                Registrarse
+              </Link>
             </div>
           </div>
         </div>

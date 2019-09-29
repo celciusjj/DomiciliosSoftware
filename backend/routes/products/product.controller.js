@@ -14,40 +14,57 @@ function retrieveProducts(req, res) {
   });
 }
 
+function getOneProduct(req, res) {
+  let { productId } = req.params;
+  if (productId) {
+    client.connect(err => {
+      if (err) throw err;
+      const dataBase = client.db(nameDB);
+      dataBase
+        .collection(collectionName)
+        .findOne({ productId: productId }, (err, value) => {
+          if (err) throw err;
+          if (value) {
+            res.status(200).send({
+              status: true,
+              product: value,
+              message: "El producto se encontró"
+            });
+          } else {
+            res.status(400).send({
+              status: false,
+              product: [],
+              message: "El producto no se encuentra"
+            });
+          }
+        });
+    });
+  } else {
+    res.status(400).send({
+      status: false,
+      product: [],
+      message: "Campos incompletos"
+    });
+  }
+}
+
 function postProduct(req, res) {
-  let {
-    productId,
-    name,
-    price,
-    quantity,
-    description,
-    availability,
-    url
-  } = req.body;
-  if (
-    productId &&
-    name &&
-    price &&
-    quantity &&
-    description &&
-    url
-  ) {
+  let { name, price, quantity, description, availability, url } = req.body;
+  if (name && price && quantity && description && url) {
     client.connect(err => {
       if (err) throw err;
       const db = client.db(nameDB);
-      db.collection(collectionName).findOne(
-        { productId: productId },
-        (err, product) => {
+
+      db.collection(collectionName)
+        .find({})
+        .toArray((err, items) => {
           if (err) throw err;
-          if (product) {
-            res.status(201).send({
-              status: false,
-              product: [],
-              message: "El elemento ya se encuentra agregado"
-            });
-          } else {
-            var data = {
-              productId,
+          let data;
+          if (items.length > 0) {
+            data = {
+              productId: (
+                parseInt(items[items.length - 1].productId) + 1
+              ).toString(),
               name,
               price,
               quantity,
@@ -55,17 +72,34 @@ function postProduct(req, res) {
               availability,
               url
             };
-            db.collection(collectionName).insertOne(data, (err, value) => {
-              if (err) throw err;
+          } else {
+            data = {
+              productId: 1,
+              name,
+              price,
+              quantity,
+              description,
+              availability,
+              url
+            };
+          }
+          db.collection(collectionName).insertOne(data, (err, value) => {
+            if (err) throw err;
+            if (value.ops[0]) {
               res.status(201).send({
                 status: true,
                 product: value.ops[0],
                 message: "Elemento agregado éxitosamente"
               });
-            });
-          }
-        }
-      );
+            } else {
+              res.status(400).send({
+                status: false,
+                product: [],
+                message: "No se agrego el elemento"
+              });
+            }
+          });
+        });
     });
   } else {
     res.status(400).send({
@@ -153,5 +187,6 @@ module.exports = {
   retrieveProducts,
   postProduct,
   editProduct,
-  deleteProduct
+  deleteProduct,
+  getOneProduct
 };
