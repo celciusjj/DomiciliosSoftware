@@ -30,7 +30,6 @@ class Header extends Component {
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between  d-flex">
-
         <div className="d-flex flex-row">  
           <Link
             onClick={this.onClickProductos}
@@ -39,21 +38,11 @@ class Header extends Component {
           >
             Productos
           </Link>
-          <Link to={"/"} className="text-light p-2 ">
+          <Link to={"/"} className="text-light p-2 ml-3 ">
             Despachadores
           </Link>
-        </div>
 
-        <div>
-          <div style={{ float: "right", marginTop: "5px" }}>
-            <Link
-              hidden={localStorage.getItem("domicilio") ? true : false}
-              to={"/login/"}
-              className="text-light mr-5"
-              style={{ float: "right" }}
-            >
-              Iniciar Sesión
-            </Link>
+        
             <div
               hidden={localStorage.getItem("domicilio") ? false : true}
               style={{
@@ -65,31 +54,27 @@ class Header extends Component {
 
             <Link
               to={"/orderUser/"}
-              className="text-light mr-5"
-              style={{ float: "right" }}
+              className="text-light mr-5 mt-2 ml-5"
             >
               Mis pedidos
             </Link>
             <Link
               to={"/carrito/"}
-              className="text-light mr-5"
-              style={{ float: "right" }}
+              className="text-light mr-5 mt-2"
               onClick={this.onClickPedidos}
             >
               Carrito de compras
             </Link>
-          </div>
-          <div style={{ float: "left", marginRight: "25px" }}>
-            <input
+        </div>
+        <input
               id="searcher"
               type="text"
-              className="form-control d-none"
+              className="form-control d-none w-25"
               placeholder="Buscar"
               onChange={e => this.props.palabraBuscador(e.target.value)}
             />
-          </div>
-        </div>
-        <NavDropdown
+
+          <NavDropdown
               title={
                 localStorage.getItem("domicilio") ? (
                   <h6 style={{ color: "white", float: "left" }}>
@@ -107,7 +92,16 @@ class Header extends Component {
               <NavDropdown.Item onClick={this.handleClickSignOut}>
                 Cerrar sesión
               </NavDropdown.Item>
-        </NavDropdown>
+          </NavDropdown>
+
+          <Link
+              hidden={localStorage.getItem("domicilio") ? true : false}
+              to={"/login/"}
+              className="text-light mr-5"
+              style={{ float: "right" }}
+            >
+              Iniciar Sesión
+            </Link>
       </nav>
     );
   }
