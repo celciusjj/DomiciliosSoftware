@@ -12,6 +12,7 @@ export const getOrders = () => async dyspatch => {
 
 export const addOrder = order => async dyspatch => {
   const respuesta = await Axios.post("http://localhost:4000/order/add", order);
+
   dyspatch({
     type: "REALIZAR_PEDIDO",
     payload: respuesta

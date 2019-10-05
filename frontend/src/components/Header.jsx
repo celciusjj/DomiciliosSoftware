@@ -58,8 +58,8 @@ class Header extends Component {
           <Link
             hidden={
               localStorage.getItem("domicilio")
-                ? JSON.parse(localStorage.getItem("domicilio"))[0].role
-                : !JSON.parse(localStorage.getItem("domicilio"))[0].role
+                ? !JSON.parse(localStorage.getItem("domicilio"))[0].role
+                : true
             }
             to={"/orderUser/"}
             className="text-light mr-5 mt-2 ml-5"

@@ -31,18 +31,24 @@ class ShopCartProducts extends React.Component {
   };
 
   makeOrderClick = () => {
-    var { products } = this.state;
-    const orderUser = {
-      orderPrice: this.getTotalPrice(),
-      order: products
-    };
+    if (localStorage.getItem("domicilio")) {
+      var { products } = this.state;
+      const orderUser = {
+        orderPrice: this.getTotalPrice(),
+        order: products,
+        clientData: {
+          name: JSON.parse(localStorage.getItem("domicilio"))[0].name,
+          email: JSON.parse(localStorage.getItem("domicilio"))[0].email
+        }
+      };
 
-    this.props.addOrder(orderUser);
-    this.props.getOrders();
-    this.setState({
-      isSend: "enviado"
-    });
-    localStorage.removeItem("shopCart");
+      this.props.addOrder(orderUser);
+      this.props.getOrders();
+      this.setState({
+        isSend: "enviado"
+      });
+      localStorage.removeItem("shopCart");
+    }
   };
 
   render() {

@@ -62,7 +62,7 @@ class Producto extends Component {
             Ingrese cantidad
           </div>
         ) : situacional === "producto agregado" ? (
-          <div class="alert alert-success text-center" role="alert">
+          <div className="alert alert-success text-center" role="alert">
             Producto agregado
           </div>
         ) : (

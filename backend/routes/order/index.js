@@ -3,7 +3,7 @@ const routes = express.Router();
 const controller = require("./order.controller");
 
 //TODO: Don't forget the authorization token
-routes.post("/order/add", controller.postOrder);
+routes.post("/order/add", controller.addOrder);
 routes.get("/orders", controller.getOrders);
 routes.delete("/order/:id", controller.deleteOrder);
 

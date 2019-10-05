@@ -11,6 +11,7 @@ class TableOrders extends React.Component {
         <thead>
           <tr>
             <th scope="col">Id Orden</th>
+            <th scope="col">Cliente</th>
             <th scope="col">Compra</th>
             <th scope="col">Precio total compra</th>
           </tr>
@@ -20,6 +21,7 @@ class TableOrders extends React.Component {
             this.props.data.map(order => (
               <tr key={order.orderId}>
                 <th scope="row">{order.orderId}</th>
+                <td>{order.client.name}</td>
                 {order.order.map(product => (
                   <>
                     <tr>

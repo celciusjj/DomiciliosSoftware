@@ -7,13 +7,14 @@ const collectionName = "orders";
  * @param {Request} req
  * @param {Response} res
  */
-function postOrder(req, res) {
-  let { orderPrice, order } = req.body;
+function addOrder(req, res) {
+  let { orderPrice, order, clientData } = req.body;
 
-  if (orderPrice && order) {
+  if (orderPrice && order && clientData) {
     client.connect(err => {
       if (err) throw err;
       const db = client.db(nameDB);
+
       db.collection(collectionName)
         .find()
         .toArray((err, value) => {
@@ -23,16 +24,17 @@ function postOrder(req, res) {
             data = {
               orderId: value[value.length - 1].orderId + 1,
               orderPrice: orderPrice,
-              order: order
+              order: order,
+              client: clientData
             };
           } else {
             data = {
               orderId: 1,
               orderPrice: orderPrice,
-              order: order
+              order: order,
+              client: clientData
             };
           }
-
           db.collection(collectionName).insertOne(data, (err, value) => {
             if (err) throw err;
             res.status(201).send({
@@ -110,7 +112,7 @@ function deleteOrder(req, res) {
 }
 
 module.exports = {
-  postOrder,
+  addOrder,
   getOrders,
   deleteOrder
 };
