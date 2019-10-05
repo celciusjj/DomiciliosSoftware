@@ -13,28 +13,27 @@ code {
 }
 
 .tabs:hover {
-  background-color: #ACE1C2;
-  
+  background-color: #ace1c2;
 }
 
 .imgProductos {
   height: 200px;
-  width: 200px,
+  width: 200px;
 }
 
 .alertShow {
   animation-duration: 10s;
   animation-name: slidein;
-
 }
+
 
 @keyframes slidein {
   0% {
     opacity: 0;
-    z-index:1;
-}
-100% {
+    z-index: 1;
+  }
+  100% {
     opacity: 1;
     z-index: -5;
-}
+  }
 }

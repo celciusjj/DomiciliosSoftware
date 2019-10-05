@@ -3,7 +3,7 @@ import Axios from "axios";
 var url = "http://localhost:4000";
 var token = "";
 
-if (localStorage.getItem("user"))
+if (localStorage.getItem("domicilio"))
   token = JSON.parse(localStorage.getItem("domicilio"))[1];
 
 export const addProduct = body => {
