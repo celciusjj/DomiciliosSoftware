@@ -25,7 +25,8 @@ function addOrder(req, res) {
               orderId: value[value.length - 1].orderId + 1,
               orderPrice: orderPrice,
               order: order,
-              client: clientData
+              client: clientData,
+              state: "pendiente"
             };
           } else {
             data = {

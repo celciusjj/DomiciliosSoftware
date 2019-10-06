@@ -1,5 +1,5 @@
 import React from "react";
-import {removeOrder} from '../../APICalls/order';
+import {removeOrder} from '../../actions/orderActions'
 
 /**
  * This class renders a table which contains
@@ -9,8 +9,7 @@ class TableOrders extends React.Component {
 
   //Esta mierda esta mala por que no actualiza el estado, es decir no estaba llamando a redux
   deleteOrder = async() => {
-    let response = await removeOrder(3);
-    console.log(response)
+    await removeOrder(4);
   }
 
   render() {
@@ -23,12 +22,14 @@ class TableOrders extends React.Component {
             <th scope="col">Compra</th>
             <th scope="col">Precio total compra</th>
             <th scope="col">Acciones</th>
+            <th scope="col">Estado</th>
           </tr>
         </thead>
         <tbody>
           {this.props.data.length > 0 ? (
             this.props.data.map(order => (
               <tr key={order.orderId}>
+                
                 <th scope="row">{order.orderId}</th>
                 <td>{order.client.name}</td>
                 {order.order.map(product => (
@@ -47,9 +48,17 @@ class TableOrders extends React.Component {
                   </>
                 ))}
                 <td>{order.orderPrice}</td>
-                <td className="align-self-center">
-                  <tr><button className="btn btn-success ml-4 ">Despachar pedido</button></tr>
-                  <tr><button className="btn btn-danger mt-2 ml-3" onClick={this.deleteOrder}>Cancelar pedido</button></tr>
+                  <td className="align-self-center">
+                    {order.state === "pendiente" ? 
+                      <tr><button className="btn btn-success ml-4 ">Despachar pedido</button></tr>
+                      :
+                      <tr><button className="btn btn-success ml-4 ">Entregar pedido</button></tr>
+                    }
+                    
+                    <tr><button className="btn btn-danger mt-2 ml-3" onClick={this.deleteOrder}>Cancelar pedido</button></tr>
+                  </td>
+                  <td>
+                    {order.state}
                   </td>
               </tr>
             ))
