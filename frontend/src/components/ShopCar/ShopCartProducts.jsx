@@ -45,7 +45,8 @@ class ShopCartProducts extends React.Component {
       this.props.addOrder(orderUser);
       this.props.getOrders();
       this.setState({
-        isSend: "enviado"
+        isSend: "enviado",
+
       });
       localStorage.removeItem("shopCart");
     }

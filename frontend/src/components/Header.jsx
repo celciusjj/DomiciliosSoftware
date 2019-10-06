@@ -5,6 +5,7 @@ import { palabraBuscador } from "../actions/searcherAction";
 import { mostrarProductos } from "../actions/productActions";
 import { getOrders } from "../actions/orderActions";
 import { NavDropdown } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 class Header extends Component {
   onClickPedidos = () => {
@@ -39,28 +40,10 @@ class Header extends Component {
             Productos
           </Link>
 
-          <Link
-            to={"/infoPedidos"}
-            hidden={localStorage.getItem("domicilio") ? false : true}
-            className="text-light p-2 ml-3 "
-          >
-            InfoPedidos
-          </Link>
+
 
           <Link
-            to={"/"}
-            hidden={localStorage.getItem("domicilio") ? false : true}
-            className="text-light p-2 ml-3 "
-          >
-            Despachadores
-          </Link>
 
-          <Link
-            hidden={
-              localStorage.getItem("domicilio")
-                ? !JSON.parse(localStorage.getItem("domicilio"))[0].role
-                : true
-            }
             to={"/orderUser/"}
             className="text-light mr-5 mt-2 ml-5"
           >
@@ -68,7 +51,7 @@ class Header extends Component {
           </Link>
           <Link
             to={"/carrito/"}
-            className="text-light mr-5 mt-2"
+            className="text-light mr-5 mt-2 ml-3"
             onClick={this.onClickPedidos}
           >
             Carrito de compras
@@ -94,7 +77,21 @@ class Header extends Component {
           alignRight={true}
           style={{ fontSize: "18px" }}
         >
-          <Link to="/crud/">Gestionar Productos</Link>
+
+          <LinkContainer to="/crud/">
+              <NavDropdown.Item>Gestionar productos</NavDropdown.Item>
+          </LinkContainer>
+          
+
+          <LinkContainer to="/infoPedidos">
+            <NavDropdown.Item>Información pedidos</NavDropdown.Item>
+          </LinkContainer>
+
+          <LinkContainer to="/despachadores">
+            <NavDropdown.Item>Despachadores</NavDropdown.Item>
+          </LinkContainer>
+
+
           <NavDropdown.Item onClick={this.handleClickSignOut}>
             Cerrar sesión
           </NavDropdown.Item>

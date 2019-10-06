@@ -1,19 +1,28 @@
 import React from "react";
+import {removeOrder} from '../../APICalls/order';
 
 /**
  * This class renders a table which contains
  * all the orders from users
  */
 class TableOrders extends React.Component {
+
+  //Esta mierda esta mala por que no actualiza el estado, es decir no estaba llamando a redux
+  deleteOrder = async() => {
+    let response = await removeOrder(3);
+    console.log(response)
+  }
+
   render() {
     return (
-      <table class="table table-bordered" style={{ color: "black" }}>
+      <table className="table table-bordered" style={{ color: "black" }}>
         <thead>
           <tr>
             <th scope="col">Id Orden</th>
             <th scope="col">Cliente</th>
             <th scope="col">Compra</th>
             <th scope="col">Precio total compra</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -38,6 +47,10 @@ class TableOrders extends React.Component {
                   </>
                 ))}
                 <td>{order.orderPrice}</td>
+                <td className="align-self-center">
+                  <tr><button className="btn btn-success ml-4 ">Despachar pedido</button></tr>
+                  <tr><button className="btn btn-danger mt-2 ml-3" onClick={this.deleteOrder}>Cancelar pedido</button></tr>
+                  </td>
               </tr>
             ))
           ) : (
