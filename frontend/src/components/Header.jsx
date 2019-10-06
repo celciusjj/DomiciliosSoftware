@@ -26,7 +26,11 @@ class Header extends Component {
   };
 
   render() {
-    this.props.getOrders();
+    if (localStorage.getItem("domicilio")) {
+      this.props.getOrders(
+        JSON.parse(localStorage.getItem("domicilio"))[0].email
+      );
+    }
     this.props.mostrarProductos();
 
     return (
@@ -40,13 +44,7 @@ class Header extends Component {
             Productos
           </Link>
 
-
-
-          <Link
-
-            to={"/orderUser/"}
-            className="text-light mr-5 mt-2 ml-5"
-          >
+          <Link to={"/orderUser/"} className="text-light mr-5 mt-2 ml-5">
             Mis pedidos
           </Link>
           <Link
@@ -77,11 +75,9 @@ class Header extends Component {
           alignRight={true}
           style={{ fontSize: "18px" }}
         >
-
           <LinkContainer to="/crud/">
-              <NavDropdown.Item>Gestionar productos</NavDropdown.Item>
+            <NavDropdown.Item>Gestionar productos</NavDropdown.Item>
           </LinkContainer>
-          
 
           <LinkContainer to="/infoPedidos">
             <NavDropdown.Item>Información pedidos</NavDropdown.Item>
@@ -90,7 +86,6 @@ class Header extends Component {
           <LinkContainer to="/despachadores">
             <NavDropdown.Item>Despachadores</NavDropdown.Item>
           </LinkContainer>
-
 
           <NavDropdown.Item onClick={this.handleClickSignOut}>
             Cerrar sesión

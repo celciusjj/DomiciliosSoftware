@@ -9,7 +9,11 @@ class OrderUser extends React.Component {
   };
 
   componentWillMount() {
-    this.props.getOrders();
+    if (localStorage.getItem("domicilio")) {
+      this.props.getOrders(
+        JSON.parse(localStorage.getItem("domicilio"))[0].email
+      );
+    }
   }
 
   componentWillReceiveProps() {

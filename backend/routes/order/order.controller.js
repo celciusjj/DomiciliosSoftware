@@ -111,8 +111,48 @@ function deleteOrder(req, res) {
   });
 }
 
+function getOrdersByUser(req, res) {
+  let { userId } = req.params;
+  if (userId) {
+    client.connect(err => {
+      if (err) throw err;
+      const dataBase = client.db(nameDB);
+      dataBase
+        .collection(collectionName)
+        .aggregate([
+          {
+            $match: { "client.email": userId }
+          }
+        ])
+        .toArray((err, result) => {
+          if (err) throw err;
+          if (result) {
+            res.status(200).send({
+              status: true,
+              data: result,
+              message: "Ordenes del usuario"
+            });
+          } else {
+            res.status(400).send({
+              status: false,
+              data: [],
+              message: "Error al recuperar ordenes"
+            });
+          }
+        });
+    });
+  } else {
+    res.status(400).send({
+      status: false,
+      data: [],
+      message: "No se encontro"
+    });
+  }
+}
+
 module.exports = {
   addOrder,
   getOrders,
-  deleteOrder
+  deleteOrder,
+  getOrdersByUser
 };

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 // Redux
 import { connect } from "react-redux";
@@ -6,7 +6,7 @@ import { mostrarProductos } from "../../actions/productActions";
 import Producto from "./Producto";
 import Spinner from "react-bootstrap/Spinner";
 
-class Productos extends Component {
+class Productos extends React.Component {
   componentDidMount() {
     this.props.mostrarProductos();
     var searcher = document.getElementById("searcher");

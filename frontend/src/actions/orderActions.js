@@ -1,8 +1,8 @@
 import { OBTENER_ORDENES } from "./types";
 import Axios from "axios";
 
-export const getOrders = () => async dyspatch => {
-  const ordersData = await Axios.get("http://localhost:4000/orders");
+export const getOrders = userId => async dyspatch => {
+  const ordersData = await Axios.get(`http://localhost:4000/order/${userId}`);
 
   dyspatch({
     type: OBTENER_ORDENES,
