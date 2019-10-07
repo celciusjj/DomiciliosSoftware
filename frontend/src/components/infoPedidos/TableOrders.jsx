@@ -1,5 +1,6 @@
 import React from "react";
 import {removeOrder} from '../../actions/orderActions'
+import {Link} from 'react-router-dom'
 
 /**
  * This class renders a table which contains
@@ -50,7 +51,7 @@ class TableOrders extends React.Component {
                 <td>{order.orderPrice}</td>
                   <td className="align-self-center">
                     {order.state === "pendiente" ? 
-                      <tr><button className="btn btn-success ml-4 ">Despachar pedido</button></tr>
+                      <tr><Link to="/despachadores" className="btn btn-success ml-4 ">Despachar pedido</Link></tr>
                       :
                       <tr><button className="btn btn-success ml-4 ">Entregar pedido</button></tr>
                     }

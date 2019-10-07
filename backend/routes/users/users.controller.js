@@ -53,6 +53,19 @@ function addUser(req, res) {
   }
 }
 
+function getDeliveries(req, res){
+  client.connect(err => {
+    if (err) throw err;
+    const database = client.db(nameDB);
+    database.collection(collectionName).find({role:{$eq:"repartidor"}}).toArray(function(err, value){
+      if (err) throw err;
+      res.status(200).send({
+        value,
+      });
+    })
+  }) 
+}
+
 function authUser(req, res) {
   let { email } = req.body;
   let { password } = req.body;
@@ -101,5 +114,6 @@ function authUser(req, res) {
 
 module.exports = {
   addUser,
-  authUser
+  authUser,
+  getDeliveries
 };
