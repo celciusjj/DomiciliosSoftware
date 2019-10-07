@@ -19,7 +19,6 @@ class Login extends Component {
         .then(res => res.json())
         .then(result => {
           if (result.status) {
-            console.log(result.message);
             localStorage.setItem(
               "domicilio",
               JSON.stringify([result.data, result.token])
@@ -31,7 +30,6 @@ class Login extends Component {
             });
             this.props.history.push("/");
           } else {
-            console.log(result.message);
             this.setState({
               error: "usuario no encontrado"
             });

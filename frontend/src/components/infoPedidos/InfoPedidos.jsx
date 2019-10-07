@@ -1,15 +1,33 @@
 import React from "react";
 import TableOrders from "./TableOrders";
 import { connect } from "react-redux";
-import { getOrders } from "../../actions/orderActions";
+import { getAllOrders } from "../../actions/orderActions";
 
 class InfoPedidos extends React.Component {
+  state = {
+    orders: []
+  };
+
+  componentDidMount() {
+    this.props.getAllOrders();
+  }
+
+  /**
+   * Will update the orders state until its length is empty
+   */
+  componentWillReceiveProps() {
+    if (this.state.orders.length === 0) {
+      console.log(this.props.orderUsers);
+      this.setState({ orders: this.props.orderUsers });
+    }
+  }
+
   render() {
     return (
       <div className="text-center">
         <h2 className="card mt-5">Ordenes</h2>
-        {this.props.orderUsers.length > 0 ? (
-          <TableOrders data={this.props.orderUsers} />
+        {this.state.orders.length > 0 ? (
+          <TableOrders data={this.state.orders} />
         ) : (
           <h5>Espera...</h5>
         )}
@@ -26,5 +44,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getOrders }
+  { getAllOrders }
 )(InfoPedidos);

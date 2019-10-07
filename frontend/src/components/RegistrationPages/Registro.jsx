@@ -27,33 +27,15 @@ class Registro extends Component {
 
   comprobarRadioButton = e => {
     e.preventDefault();
-
     const { contrasena, contrasenaConfirm } = this.state;
-
-    let radioUsuario = document.getElementById("radioUsuario").checked;
-    let radioDespachador = document.getElementById("radioDespachador").checked;
-    let radioAdmin = document.getElementById("radioAdmin").checked;
-
-    if (radioUsuario) {
-      this.setState({
-        rol: false
-      });
-    } else if (radioDespachador) {
-      this.setState({
-        rol: true
-      });
-    } else if (radioAdmin) {
-      this.setState({
-        rol: true
-      });
-    }
 
     if (
       this.state.nombre &&
       this.state.correo &&
       this.state.contrasena &&
       this.state.contrasenaConfirm &&
-      this.state.direccion
+      this.state.direccion &&
+      this.state.rol
     ) {
       if (contrasena === contrasenaConfirm) {
         if (emailExpression.test(this.state.correo)) {
@@ -74,10 +56,12 @@ class Registro extends Component {
                     contrasena: "",
                     contrasenaConfirm: "",
                     direccion: "",
-                    rol: false
+                    rol: ""
                   });
                 } else {
-                  console.log(result.message);
+                  this.setState({
+                    error: result.message
+                  });
                 }
               });
           } else {
@@ -193,6 +177,7 @@ class Registro extends Component {
                           className="custom-control-input"
                           id="radioUsuario"
                           name="groupOfDefaultRadios"
+                          onClick={() => this.setState({ rol: "user" })}
                         />
                         <label
                           className="custom-control-label"
@@ -209,6 +194,7 @@ class Registro extends Component {
                           className="custom-control-input"
                           id="radioDespachador"
                           name="groupOfDefaultRadios"
+                          onClick={() => this.setState({ rol: "repartidor" })}
                         />
                         <label
                           className="custom-control-label"
@@ -225,6 +211,7 @@ class Registro extends Component {
                           className="custom-control-input"
                           id="radioAdmin"
                           name="groupOfDefaultRadios"
+                          onClick={() => this.setState({ rol: "admin" })}
                         />
                         <label
                           className="custom-control-label"

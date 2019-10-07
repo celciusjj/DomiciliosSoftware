@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { palabraBuscador } from "../actions/searcherAction";
 import { mostrarProductos } from "../actions/productActions";
-import { getOrders } from "../actions/orderActions";
+import { getOrders, getAllOrders } from "../actions/orderActions";
 import { NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -27,9 +27,14 @@ class Header extends Component {
 
   render() {
     if (localStorage.getItem("domicilio")) {
-      this.props.getOrders(
-        JSON.parse(localStorage.getItem("domicilio"))[0].email
-      );
+      let userRole = JSON.parse(localStorage.getItem("domicilio"))[0].role;
+      if (userRole !== "admin" && userRole !== "repartidor") {
+        this.props.getOrders(
+          JSON.parse(localStorage.getItem("domicilio"))[0].email
+        );
+      } else {
+        this.props.getAllOrders();
+      }
     }
     this.props.mostrarProductos();
 
@@ -75,17 +80,28 @@ class Header extends Component {
           alignRight={true}
           style={{ fontSize: "18px" }}
         >
-          <LinkContainer to="/crud/">
-            <NavDropdown.Item>Gestionar productos</NavDropdown.Item>
-          </LinkContainer>
+          <div
+            hidden={
+              localStorage.getItem("domicilio")
+                ? JSON.parse(localStorage.getItem("domicilio"))[0].role ===
+                  "admin"
+                  ? false
+                  : true
+                : true
+            }
+          >
+            <LinkContainer to="/crud/">
+              <NavDropdown.Item>Gestionar productos</NavDropdown.Item>
+            </LinkContainer>
 
-          <LinkContainer to="/infoPedidos">
-            <NavDropdown.Item>Información pedidos</NavDropdown.Item>
-          </LinkContainer>
+            <LinkContainer to="/infoPedidos">
+              <NavDropdown.Item>Información pedidos</NavDropdown.Item>
+            </LinkContainer>
 
-          <LinkContainer to="/despachadores">
-            <NavDropdown.Item>Despachadores</NavDropdown.Item>
-          </LinkContainer>
+            <LinkContainer to="/despachadores">
+              <NavDropdown.Item>Despachadores</NavDropdown.Item>
+            </LinkContainer>
+          </div>
 
           <NavDropdown.Item onClick={this.handleClickSignOut}>
             Cerrar sesión
@@ -107,5 +123,5 @@ class Header extends Component {
 
 export default connect(
   null,
-  { palabraBuscador, mostrarProductos, getOrders }
+  { palabraBuscador, mostrarProductos, getOrders, getAllOrders }
 )(Header);

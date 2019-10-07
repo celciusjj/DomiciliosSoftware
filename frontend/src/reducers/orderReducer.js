@@ -1,4 +1,4 @@
-import { OBTENER_ORDENES } from "../actions/types";
+import { OBTENER_ORDENES, OBTENER_ORDENES_TODAS } from "../actions/types";
 
 const initialState = {
   order: []
@@ -7,6 +7,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case OBTENER_ORDENES:
+      return {
+        ...state,
+        order: action.payload
+      };
+    case OBTENER_ORDENES_TODAS:
       return {
         ...state,
         order: action.payload

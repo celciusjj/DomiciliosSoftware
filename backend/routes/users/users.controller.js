@@ -7,7 +7,7 @@ const collectionName = "users";
 function addUser(req, res) {
   let { name, email, password, address, role } = req.body;
 
-  if (name && email && password && address) {
+  if (name && email && password && address && role) {
     client.connect(err => {
       if (err) throw err;
       const database = client.db(nameDB);
@@ -27,9 +27,9 @@ function addUser(req, res) {
               email,
               password: crypto.createHmac("sha256", password).digest("hex"),
               addUser,
-              role
+              role,
+              address
             };
-            console.log("Entra a la");
             database
               .collection(collectionName)
               .insertOne(data, (err, value) => {
@@ -53,17 +53,30 @@ function addUser(req, res) {
   }
 }
 
-function getDeliveries(req, res){
+function getDeliveries(req, res) {
   client.connect(err => {
     if (err) throw err;
     const database = client.db(nameDB);
-    database.collection(collectionName).find({role:{$eq:"repartidor"}}).toArray(function(err, value){
-      if (err) throw err;
-      res.status(200).send({
-        value,
+    database
+      .collection(collectionName)
+      .find({ role: "repartidor" })
+      .toArray(function(err, result) {
+        if (err) throw err;
+        if (result) {
+          res.status(200).send({
+            status: true,
+            data: result,
+            message: "Repartidores"
+          });
+        } else {
+          res.status(400).send({
+            status: false,
+            data: [],
+            message: "Error, intenta de nuevo"
+          });
+        }
       });
-    })
-  }) 
+  });
 }
 
 function authUser(req, res) {
@@ -86,7 +99,6 @@ function authUser(req, res) {
           if (value) {
             let token = createToken({ ...value });
             delete value.password;
-            delete value.address;
             res.status(200).send({
               status: true,
               data: value,

@@ -46,6 +46,8 @@ class OrderUser extends React.Component {
                 deleteItem={this.onHandleDeleteItem.bind(this, result.orderId)}
               ></OrderUserItem>
             ))
+          : JSON.parse(localStorage.getItem("domicilio"))[0].role === "admin"
+          ? "Eres un administrador o repartidor"
           : "No hay ordenes"}
       </div>
     );

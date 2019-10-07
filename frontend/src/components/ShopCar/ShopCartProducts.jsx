@@ -38,15 +38,15 @@ class ShopCartProducts extends React.Component {
         order: products,
         clientData: {
           name: JSON.parse(localStorage.getItem("domicilio"))[0].name,
-          email: JSON.parse(localStorage.getItem("domicilio"))[0].email
+          email: JSON.parse(localStorage.getItem("domicilio"))[0].email,
+          address: JSON.parse(localStorage.getItem("domicilio"))[0].address
         }
       };
 
       this.props.addOrder(orderUser);
       this.props.getOrders();
       this.setState({
-        isSend: "enviado",
-
+        isSend: "enviado"
       });
       localStorage.removeItem("shopCart");
     }
