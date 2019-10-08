@@ -18,7 +18,8 @@ class Delivers extends React.Component {
     });
   };
 
-  onHandleDeliver = () => {
+  onHandleDeliver = (e) => {
+    //e.preventDefault();
     this.props
       .updateOrderState(this.props.idOrder, { newState: "despachado" })
       .then(() => this.props.changeToArray(this.props.idOrder, "despachado"));

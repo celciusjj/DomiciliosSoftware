@@ -134,7 +134,7 @@ class TableOrders extends React.Component {
                           Despachar pedido
                         </button>
                       </tr>
-                    ) : (
+                    ) : order.state === "despachado" ? (
                       <tr>
                         <button
                           className="btn btn-success ml-4 "
@@ -146,15 +146,24 @@ class TableOrders extends React.Component {
                           Entregar pedido
                         </button>
                       </tr>
-                    )}
+                    ) : 
+                    <button
+                    className="btn btn-success ml-4 "
+                    >
+                    Archivar pedido
+                    </button>
+                    }
 
                     <tr>
-                      <button
+                      {order.state !== "entregado" ? 
+                        <button
                         className="btn btn-danger mt-2 ml-3"
                         onClick={this.deleteOrder.bind(this, order.orderId)}
                       >
                         Cancelar pedido
                       </button>
+                      : ""
+                      } 
                     </tr>
                   </td>
                   <td>
@@ -162,11 +171,15 @@ class TableOrders extends React.Component {
                       <p className="text-danger font-weight-bold">
                         {order.state}
                       </p>
-                    ) : (
+                    ) : order.state === "despachado" ? (
                       <p className="text-warning font-weight-bold">
                         {order.state}
                       </p>
-                    )}
+                    )  : 
+                      <p className="text-success font-weight-bold">
+                      {order.state}
+                     </p>
+                    }
                   </td>
                 </tr>
               ))
