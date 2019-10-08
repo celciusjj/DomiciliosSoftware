@@ -1,0 +1,22 @@
+{
+  "name": "domiciliossoftware",
+  "version": "1.0.0",
+  "description": "Este es un proyecto que involucra el proceso de ventas de productos.\r Consiste en un sistema de domicilios donde un cliente realiza su carrito de compras y realiza su pedido a la empresa que hizo adquisición de la aplicación.",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/celciusjj/DomiciliosSoftware.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/celciusjj/DomiciliosSoftware/issues"
+  },
+  "homepage": "https://github.com/celciusjj/DomiciliosSoftware#readme"
+}
