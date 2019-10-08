@@ -1,4 +1,8 @@
-import { OBTENER_ORDENES, OBTENER_ORDENES_TODAS } from "./types";
+import {
+  OBTENER_ORDENES,
+  OBTENER_ORDENES_TODAS,
+  EDITAR_ESTADO_PEDIDO
+} from "./types";
 import Axios from "axios";
 
 const url = "http://localhost:4000";
@@ -49,6 +53,19 @@ export const removeOrder = id => async dyspatch => {
   const respuesta = Axios.delete(`${url}/order/${id}`);
   dyspatch({
     type: "ELIMINAR_PEDIDO",
+    payload: respuesta
+  });
+};
+
+/**
+ * This function updates the state of a order given this parameters:
+ * @param {Int} orderId
+ * @param {Object} newState
+ */
+export const updateOrderState = (orderId, newState) => async dyspatch => {
+  const respuesta = Axios.put(`${url}/order/${orderId}`, newState);
+  dyspatch({
+    type: EDITAR_ESTADO_PEDIDO,
     payload: respuesta
   });
 };

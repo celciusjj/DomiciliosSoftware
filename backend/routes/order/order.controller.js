@@ -151,9 +151,46 @@ function getOrdersByUser(req, res) {
   }
 }
 
+function updateOrderState(req, res) {
+  let { orderId } = req.params;
+  let { newState } = req.body;
+  if (orderId && newState) {
+    client.connect(err => {
+      if (err) throw err;
+      const dataBase = client.db(nameDB);
+      dataBase
+        .collection(collectionName)
+        .updateOne(
+          { orderId: parseInt(orderId) },
+          { $set: { state: newState } },
+          (err, value) => {
+            if (err) throw err;
+            if (value.result.n > 0) {
+              res.status(200).send({
+                status: true,
+                message: "Actualizado"
+              });
+            } else {
+              res.status(400).send({
+                status: false,
+                message: "No se encontro la orden"
+              });
+            }
+          }
+        );
+    });
+  } else {
+    res.status(400).send({
+      status: false,
+      message: "Campos incompletos"
+    });
+  }
+}
+
 module.exports = {
   addOrder,
   getOrders,
   deleteOrder,
-  getOrdersByUser
+  getOrdersByUser,
+  updateOrderState
 };
