@@ -25,7 +25,7 @@ class InfoPedidos extends React.Component {
   render() {
     return (
       <div className="text-center">
-        <h2 className="card mt-5">Ordenes</h2>
+
         {this.state.orders.length > 0 ? (
           <TableOrders data={this.state.orders} />
         ) : (

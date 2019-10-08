@@ -2,6 +2,7 @@ import React from "react";
 import { removeOrder } from "../../actions/orderActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Delivers from '../deliversManagment/Delivers'
 
 /**
  * This class renders a table which contains
@@ -9,7 +10,9 @@ import { Link } from "react-router-dom";
  */
 class TableOrders extends React.Component {
   state = {
-    orders: this.props.data
+    orders: this.props.data,
+    delivers: false,
+    orderSelected: ""
   };
 
   deleteOrder = idOrder => {
@@ -20,8 +23,20 @@ class TableOrders extends React.Component {
     });
   };
 
+
+
   render() {
     return (
+      <div>
+          {this.state.delivers ?
+           <Delivers
+              idOrder={this.state.orderSelected}
+           />
+          :
+          ""
+          }
+         
+          <h2 className="card mt-5">Ordenes</h2>
       <table className="table table-bordered" style={{ color: "black" }}>
         <thead>
           <tr>
@@ -60,12 +75,12 @@ class TableOrders extends React.Component {
                 <td className="align-self-center">
                   {order.state === "pendiente" ? (
                     <tr>
-                      <Link
-                        to="/despachadores"
+                      <button
+                        onClick={() => this.setState({orderSelected: order.orderId, delivers: true})}
                         className="btn btn-success ml-4 "
                       >
                         Despachar pedido
-                      </Link>
+                      </button>
                     </tr>
                   ) : (
                     <tr>
@@ -84,7 +99,12 @@ class TableOrders extends React.Component {
                     </button>
                   </tr>
                 </td>
-                <td>{order.state}</td>
+                <td>{order.state  === "pendiente" ?
+                  <p className="text-danger font-weight-bold">{order.state}</p>
+                  :
+                  <p className="text-warning font-weight-bold">{order.state}</p>
+                  }
+                </td>
               </tr>
             ))
           ) : (
@@ -94,6 +114,7 @@ class TableOrders extends React.Component {
           )}
         </tbody>
       </table>
+      </div>
     );
   }
 }
