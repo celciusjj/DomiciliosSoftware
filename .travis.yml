@@ -1,0 +1,27 @@
+language: javascript
+node_js:
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
+install:
+  - npm install
+
+env:
+  global:
+    - NODE_ENV=test
+
+script:
+  - npm test
+after_success:
+  - npm run coverage
+
+addons:
+  sonarcloud:
+    organization: "danielberriob"
+    token:
+      secure: "35e7c966f8a6d0a6e65879d048767df8ae4aa336" # encrypted value of your token
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - sonar-scanner
