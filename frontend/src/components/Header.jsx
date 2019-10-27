@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { palabraBuscador } from "../actions/searcherAction";
 import { mostrarProductos } from "../actions/productActions";
-import { getOrders, getAllOrders } from "../actions/orderActions";
 import { NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import {
+  getOrders,
+  getAllOrders,
+  getOrdersDelivered
+} from "../actions/orderActions";
 
 class Header extends Component {
   onClickPedidos = () => {
@@ -34,6 +38,7 @@ class Header extends Component {
         );
       } else {
         this.props.getAllOrders();
+        this.props.getOrdersDelivered();
       }
     }
     this.props.mostrarProductos();
@@ -98,6 +103,10 @@ class Header extends Component {
               <NavDropdown.Item>Información pedidos</NavDropdown.Item>
             </LinkContainer>
 
+            <LinkContainer to="/historial">
+              <NavDropdown.Item>Historial pedidos</NavDropdown.Item>
+            </LinkContainer>
+
             <LinkContainer to="/despachadores">
               <NavDropdown.Item>Despachadores</NavDropdown.Item>
             </LinkContainer>
@@ -123,5 +132,11 @@ class Header extends Component {
 
 export default connect(
   null,
-  { palabraBuscador, mostrarProductos, getOrders, getAllOrders }
+  {
+    palabraBuscador,
+    mostrarProductos,
+    getOrders,
+    getAllOrders,
+    getOrdersDelivered
+  }
 )(Header);

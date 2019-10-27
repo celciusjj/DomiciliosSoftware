@@ -8,5 +8,6 @@ routes.get("/orders", controller.getOrders);
 routes.delete("/order/:id", controller.deleteOrder);
 routes.get("/order/:userId", controller.getOrdersByUser);
 routes.put("/order/:orderId", controller.updateOrderState);
+routes.get("/ordersDelivered", controller.getOrdersDelivered);
 
 module.exports = routes;

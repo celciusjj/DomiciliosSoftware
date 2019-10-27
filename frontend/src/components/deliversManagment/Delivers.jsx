@@ -4,6 +4,8 @@ import React from "react";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 
+//heroku git:remote -a sendpa
+
 class Delivers extends React.Component {
   state = { delivers: [] };
 
@@ -18,8 +20,9 @@ class Delivers extends React.Component {
     });
   };
 
-  onHandleDeliver = (e) => {
+  onHandleDeliver = e => {
     //e.preventDefault();
+    window.postMessage("Post message from web", "*");
     this.props
       .updateOrderState(this.props.idOrder, { newState: "despachado" })
       .then(() => this.props.changeToArray(this.props.idOrder, "despachado"));

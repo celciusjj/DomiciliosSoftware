@@ -1,7 +1,8 @@
 import {
   OBTENER_ORDENES,
   OBTENER_ORDENES_TODAS,
-  EDITAR_ESTADO_PEDIDO
+  EDITAR_ESTADO_PEDIDO,
+  OBTENER_HISTORIAL
 } from "../actions/types";
 
 const initialState = {
@@ -14,6 +15,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         order: action.payload
+      };
+    case OBTENER_HISTORIAL:
+      return {
+        ...state,
+        orders: action.payload
       };
     case OBTENER_ORDENES_TODAS:
       return {

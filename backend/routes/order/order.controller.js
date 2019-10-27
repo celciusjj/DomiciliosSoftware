@@ -187,10 +187,37 @@ function updateOrderState(req, res) {
   }
 }
 
+function getOrdersDelivered(req, res) {
+  client.connect(err => {
+    if (err) throw err;
+    const dataBase = client.db(nameDB);
+    dataBase
+      .collection(collectionName)
+      .find({ state: "entregado" })
+      .toArray((err, result) => {
+        if (err) throw err;
+        if (result) {
+          res.status(200).send({
+            status: true,
+            data: result,
+            message: "Elemento entregados"
+          });
+        } else {
+          res.status(400).send({
+            status: false,
+            data: [],
+            message: "No se encontraron registros"
+          });
+        }
+      });
+  });
+}
+
 module.exports = {
   addOrder,
   getOrders,
   deleteOrder,
   getOrdersByUser,
-  updateOrderState
+  updateOrderState,
+  getOrdersDelivered
 };

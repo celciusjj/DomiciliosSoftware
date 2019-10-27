@@ -1,4 +1,4 @@
-var url = "http://localhost:4000";
+var url = "http://localhost:4000"; //"https://backend-sendpa.herokuapp.com";
 
 const addUser = body => {
   let jsonAddUser = {

@@ -8,7 +8,8 @@ import Crud from "./components/productManagement/Crud";
 import AddProduct from "./components/productManagement/AddProduct";
 import EditProduct from "./components/productManagement/EditProduct";
 import InfoPedidos from "./components/infoPedidos/InfoPedidos";
-import Delivers from './components/deliversManagment/Delivers'
+import Delivers from "./components/deliversManagment/Delivers";
+import Historial from "./components/historial/Historial";
 //router
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -37,6 +38,7 @@ class App extends React.Component {
                 <Route exact path="/edit/:id" component={EditProduct} />
                 <Route exact path="/infoPedidos" component={InfoPedidos} />
                 <Route exact path="/despachadores" component={Delivers} />
+                <Route exact path="/historial" component={Historial} />
               </Switch>
             </div>
           </React.Fragment>

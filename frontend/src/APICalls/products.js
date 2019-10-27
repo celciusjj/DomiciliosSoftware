@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-var url = "http://localhost:4000";
+var url = "http://locahost:4000"; //"https://backend-sendpa.herokuapp.com";
 var token = "";
 
 if (localStorage.getItem("domicilio"))

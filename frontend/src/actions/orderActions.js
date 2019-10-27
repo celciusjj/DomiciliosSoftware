@@ -1,11 +1,12 @@
 import {
   OBTENER_ORDENES,
   OBTENER_ORDENES_TODAS,
-  EDITAR_ESTADO_PEDIDO
+  EDITAR_ESTADO_PEDIDO,
+  OBTENER_HISTORIAL
 } from "./types";
 import Axios from "axios";
 
-const url = "http://localhost:4000";
+const url = "http://localhost:4000"; //"https://backend-sendpa.herokuapp.com";
 
 /**
  * This function gets the orders from a user
@@ -67,5 +68,16 @@ export const updateOrderState = (orderId, newState) => async dyspatch => {
   dyspatch({
     type: EDITAR_ESTADO_PEDIDO,
     payload: respuesta
+  });
+};
+
+/**
+ * This function retrieves the data who has been delivered
+ */
+export const getOrdersDelivered = () => async dyspatch => {
+  const respuesta = await Axios.get(`${url}/ordersDelivered`);
+  dyspatch({
+    type: OBTENER_HISTORIAL,
+    payload: respuesta.data.data
   });
 };
