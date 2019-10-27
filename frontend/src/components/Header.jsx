@@ -104,7 +104,7 @@ class Header extends Component {
             </LinkContainer>
 
             <LinkContainer to="/historial">
-              <NavDropdown.Item>Historial pedidos</NavDropdown.Item>
+              <NavDropdown.Item>Inventario</NavDropdown.Item>
             </LinkContainer>
 
             <LinkContainer to="/despachadores">

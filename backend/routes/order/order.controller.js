@@ -33,7 +33,8 @@ function addOrder(req, res) {
               orderId: 1,
               orderPrice: orderPrice,
               order: order,
-              client: clientData
+              client: clientData,
+              state: "pendiente"
             };
           }
           db.collection(collectionName).insertOne(data, (err, value) => {

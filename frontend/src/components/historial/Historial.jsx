@@ -10,7 +10,7 @@ class Historial extends React.Component {
   render() {
     return (
       <div>
-        <h2 className="text-center my-5">Historial de pedidos</h2>
+        <h2 className="text-center my-5">Inventario de pedidos</h2>
         <table className="table table-bordered" style={{ color: "black" }}>
           <thead>
             <tr>

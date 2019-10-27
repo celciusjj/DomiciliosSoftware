@@ -44,6 +44,7 @@ class OrderUser extends React.Component {
                 price={result.orderPrice}
                 idItem={result.orderId}
                 deleteItem={this.onHandleDeleteItem.bind(this, result.orderId)}
+                state={result.state}
               ></OrderUserItem>
             ))
           : JSON.parse(localStorage.getItem("domicilio"))[0].role === "admin"
