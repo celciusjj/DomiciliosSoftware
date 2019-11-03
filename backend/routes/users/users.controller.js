@@ -54,6 +54,7 @@ function addUser(req, res) {
 }
 
 function getDeliveries(req, res) {
+  console.log("Entra");
   client.connect(err => {
     if (err) throw err;
     const database = client.db(nameDB);

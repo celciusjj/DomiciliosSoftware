@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 //heroku git:remote -a sendpa
 
 class Delivers extends React.Component {
-  state = { delivers: [] };
+  state = { delivers: [], selectedDeliver: "" };
 
   UNSAFE_componentWillMount() {
     this.getDelivers();
@@ -15,8 +15,10 @@ class Delivers extends React.Component {
 
   getDelivers = async () => {
     let respuesta = await getDeliveries();
+    console.log(respuesta.data[0].name);
     this.setState({
-      delivers: respuesta.data
+      delivers: respuesta.data,
+      selectedDeliver: respuesta.data[0].name
     });
   };
 
@@ -24,8 +26,11 @@ class Delivers extends React.Component {
     //e.preventDefault();
     window.postMessage("Post message from web", "*");
     this.props
-      .updateOrderState(this.props.idOrder, { newState: "despachado" })
-      .then(() => this.props.changeToArray(this.props.idOrder, "despachado"));
+      .updateOrderState(this.props.idOrder, {
+        newState: "despachado",
+        deliver: this.state.selectedDeliver
+      })
+      .then(() => this.props.updateState(this.props.idOrder, "despachado"));
   };
 
   render() {
@@ -43,9 +48,19 @@ class Delivers extends React.Component {
           <div className="col-6">
             <Form.Group controlId="exampleForm.ControlSelect1">
               Despachador
-              <Form.Control as="select">
+              <Form.Control
+                as="select"
+                onChange={e =>
+                  this.setState({ selectedDeliver: e.target.value })
+                }
+                defaultValue={
+                  this.state.delivers.length > 0 && this.state.delivers[0].name
+                }
+              >
                 {this.state.delivers.map(deliver => (
-                  <option>{deliver.name}</option>
+                  <option key={deliver.name} value={deliver.name}>
+                    {deliver.name}
+                  </option>
                 ))}
               </Form.Control>
             </Form.Group>

@@ -14,7 +14,7 @@ class TableOrders extends React.Component {
     orderSelected: ""
   };
 
-  changeToArray(orderId, newState) {
+  changeToArray(orderId, newState, deliver) {
     if (this.state.orders.length > 0 && orderId && newState) {
       let newElement = this.state.orders.find(
         element => element.orderId === orderId
@@ -30,7 +30,8 @@ class TableOrders extends React.Component {
         orderPrice: newElement.orderPrice,
         order: newElement.order,
         client: newElement.client,
-        state: newState
+        state: newState,
+        deliver: deliver
       });
 
       this.setState({
@@ -117,7 +118,7 @@ class TableOrders extends React.Component {
                       </tr>
                     </>
                   ))}
-                  <td>{order.client.address}</td>
+                  <td>{order.address}</td>
                   <td>{order.orderPrice}</td>
                   <td className="align-self-center">
                     {order.state === "pendiente" ? (
@@ -146,24 +147,23 @@ class TableOrders extends React.Component {
                           Entregar pedido
                         </button>
                       </tr>
-                    ) : 
-                    <button
-                    className="btn btn-success ml-4 "
-                    >
-                    Archivar pedido
-                    </button>
-                    }
+                    ) : (
+                      <button className="btn btn-success ml-4 ">
+                        Archivar pedido
+                      </button>
+                    )}
 
                     <tr>
-                      {order.state !== "entregado" ? 
+                      {order.state !== "entregado" ? (
                         <button
-                        className="btn btn-danger mt-2 ml-3"
-                        onClick={this.deleteOrder.bind(this, order.orderId)}
-                      >
-                        Cancelar pedido
-                      </button>
-                      : ""
-                      } 
+                          className="btn btn-danger mt-2 ml-3"
+                          onClick={this.deleteOrder.bind(this, order.orderId)}
+                        >
+                          Cancelar pedido
+                        </button>
+                      ) : (
+                        ""
+                      )}
                     </tr>
                   </td>
                   <td>
@@ -172,14 +172,24 @@ class TableOrders extends React.Component {
                         {order.state}
                       </p>
                     ) : order.state === "despachado" ? (
-                      <p className="text-warning font-weight-bold">
-                        {order.state}
-                      </p>
-                    )  : 
-                      <p className="text-success font-weight-bold">
-                      {order.state}
-                     </p>
-                    }
+                      <>
+                        <p className="text-warning font-weight-bold">
+                          {order.state}
+                        </p>
+                        <p className="text-warning font-weight-bold">
+                          Repartidor: {order.deliver && order.deliver}
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-success font-weight-bold">
+                          {order.state}
+                        </p>
+                        <p className="text-warning font-weight-bold">
+                          Repartidor: {order.deliver && order.deliver}
+                        </p>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))

@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import ShopCarProduct from "./ShopCartProduct";
+import Button from "react-bootstrap/Button";
+import ModalShopCartProduct from "./ModalShopCartProduct";
 import { addOrder, getOrders } from "../../actions/orderActions";
 
 class ShopCartProducts extends React.Component {
@@ -8,7 +10,11 @@ class ShopCartProducts extends React.Component {
     isSend: "",
     products: localStorage.getItem("shopCart")
       ? JSON.parse(localStorage.getItem("shopCart"))
-      : []
+      : [],
+    showModalShopCart: false,
+    lat: null,
+    lng: null,
+    address: ""
   };
 
   getTotalPrice = () => {
@@ -31,7 +37,13 @@ class ShopCartProducts extends React.Component {
   };
 
   makeOrderClick = () => {
-    if (localStorage.getItem("domicilio")) {
+    if (
+      localStorage.getItem("domicilio") &&
+      this.state.address &&
+      this.state.lat &&
+      this.state.lng &&
+      this.state.address
+    ) {
       var { products } = this.state;
       const orderUser = {
         orderPrice: this.getTotalPrice(),
@@ -40,7 +52,10 @@ class ShopCartProducts extends React.Component {
           name: JSON.parse(localStorage.getItem("domicilio"))[0].name,
           email: JSON.parse(localStorage.getItem("domicilio"))[0].email,
           address: JSON.parse(localStorage.getItem("domicilio"))[0].address
-        }
+        },
+        lat: this.state.lat,
+        lng: this.state.lng,
+        address: this.state.address
       };
 
       this.props.addOrder(orderUser);
@@ -52,6 +67,10 @@ class ShopCartProducts extends React.Component {
     }
   };
 
+  onChangePosition = (lat, lng, address) => {
+    this.setState({ lat: lat, lng: lng, address: address });
+  };
+
   render() {
     const { isSend, products } = this.state;
     return (
@@ -60,18 +79,40 @@ class ShopCartProducts extends React.Component {
         <div className="row justify-content-center">
           <div className="col-md-8">
             <ul>
-              {products.length > 0
-                ? products.map(product => (
-                    <ShopCarProduct
-                      key={product.name}
-                      info={product}
-                      deleteItem={this.deleteItem}
-                    />
-                  ))
-                : null}
+              {products.length > 0 &&
+                products.map(product => (
+                  <ShopCarProduct
+                    key={product.name}
+                    info={product}
+                    deleteItem={this.deleteItem}
+                  />
+                ))}
             </ul>
           </div>
         </div>
+        <ModalShopCartProduct
+          show={this.state.showModalShopCart}
+          onHide={() => this.setState({ showModalShopCart: false })}
+          onParameter={this.onChangePosition}
+        />
+
+        <Button
+          variant="light"
+          style={{
+            justifyContent: "center",
+            display: "flex",
+            margin: "auto",
+            marginBottom: "20px"
+          }}
+          onClick={() => this.setState({ showModalShopCart: true })}
+        >
+          {this.state.lat && this.state.lng && this.state.address ? (
+            <>Dirección {this.state.address} </>
+          ) : (
+            "Selecciona un punto"
+          )}
+        </Button>
+
         {products.length === 0 ? (
           <img
             style={{ width: "60%", heigh: "60%" }}

@@ -8,9 +8,9 @@ const collectionName = "orders";
  * @param {Response} res
  */
 function addOrder(req, res) {
-  let { orderPrice, order, clientData } = req.body;
+  let { orderPrice, order, clientData, lat, lng, address } = req.body;
 
-  if (orderPrice && order && clientData) {
+  if (orderPrice && order && clientData && lat && lng && address) {
     client.connect(err => {
       if (err) throw err;
       const db = client.db(nameDB);
@@ -19,6 +19,7 @@ function addOrder(req, res) {
         .find()
         .toArray((err, value) => {
           if (err) throw err;
+          client.close();
           let data;
           if (value.length > 0) {
             data = {
@@ -26,27 +27,41 @@ function addOrder(req, res) {
               orderPrice: orderPrice,
               order: order,
               client: clientData,
-              state: "pendiente"
+              state: "pendiente",
+              lat,
+              lng,
+              address
             };
           } else {
             data = {
               orderId: 1,
               orderPrice: orderPrice,
               order: order,
-              client: clientData
+              client: clientData,
+              state: "pendiente",
+              lat,
+              lng,
+              address
             };
           }
           db.collection(collectionName).insertOne(data, (err, value) => {
             if (err) throw err;
-            res.status(201).send({
-              product: value.ops[0],
-              message: "Prodcutos devueltos con exito"
-            });
+            if (value.ops[0]) {
+              res.status(201).send({
+                product: data,
+                message: "Productos devueltos con exito"
+              });
+            } else {
+              res.status(400).send({
+                product: [],
+                message: "Error"
+              });
+            }
           });
         });
     });
   } else {
-    res.status(400).send({ product: [], message: "Campos incompletos" });
+    res.status(404).send({ product: [], message: "Campos incompletos" });
   }
 }
 
@@ -63,6 +78,7 @@ function getOrders(req, res) {
       .find({})
       .toArray((err, result) => {
         if (err) throw err;
+        client.close();
         if (result) {
           res.status(200).send({
             status: true,
@@ -96,6 +112,7 @@ function deleteOrder(req, res) {
       },
       (err, item) => {
         if (err) throw err;
+        client.close();
         if (item.result.n > 0) {
           res.status(200).send({
             status: true,
@@ -117,6 +134,7 @@ function getOrdersByUser(req, res) {
   if (userId) {
     client.connect(err => {
       if (err) throw err;
+      client.close();
       const dataBase = client.db(nameDB);
       dataBase
         .collection(collectionName)
@@ -153,16 +171,17 @@ function getOrdersByUser(req, res) {
 
 function updateOrderState(req, res) {
   let { orderId } = req.params;
-  let { newState } = req.body;
-  if (orderId && newState) {
+  let { newState, deliver } = req.body;
+  if (orderId && newState && deliver) {
     client.connect(err => {
       if (err) throw err;
+      client.close();
       const dataBase = client.db(nameDB);
       dataBase
         .collection(collectionName)
         .updateOne(
           { orderId: parseInt(orderId) },
-          { $set: { state: newState } },
+          { $set: { state: newState, deliver: deliver } },
           (err, value) => {
             if (err) throw err;
             if (value.result.n > 0) {
@@ -196,6 +215,7 @@ function getOrdersDelivered(req, res) {
       .find({ state: "entregado" })
       .toArray((err, result) => {
         if (err) throw err;
+        client.close();
         if (result) {
           res.status(200).send({
             status: true,

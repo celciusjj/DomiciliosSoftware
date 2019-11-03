@@ -9,6 +9,7 @@ function retrieveProducts(req, res) {
       .find()
       .toArray((err, result) => {
         if (err) throw err;
+        client.close();
         res.status(200).send(result);
       });
   });
@@ -19,6 +20,7 @@ function getOneProduct(req, res) {
   if (productId) {
     client.connect(err => {
       if (err) throw err;
+      client.close();
       const dataBase = client.db(nameDB);
       dataBase
         .collection(collectionName)
@@ -58,6 +60,7 @@ function postProduct(req, res) {
       db.collection(collectionName)
         .find({})
         .toArray((err, items) => {
+          client.close();
           if (err) throw err;
           let data;
           if (items.length > 0) {
@@ -85,6 +88,7 @@ function postProduct(req, res) {
           }
           db.collection(collectionName).insertOne(data, (err, value) => {
             if (err) throw err;
+            client.close();
             if (value.ops[0]) {
               res.status(201).send({
                 status: true,
@@ -115,6 +119,7 @@ function editProduct(req, res) {
   if (productId) {
     client.connect(err => {
       if (err) throw err;
+      client.close();
       const dataBase = client.db(nameDB);
       dataBase.collection(collectionName).updateOne(
         { productId: productId },
@@ -157,6 +162,7 @@ function deleteProduct(req, res) {
   if (productId) {
     client.connect(err => {
       if (err) throw err;
+      client.close();
       const dataBase = client.db(nameDB);
       dataBase
         .collection(collectionName)
