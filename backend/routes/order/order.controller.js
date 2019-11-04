@@ -233,11 +233,48 @@ function getOrdersDelivered(req, res) {
   });
 }
 
+function getOrdersByState(req, res) {
+  client.connect(err => {
+    if (err) throw err;
+    const dataBase = client.db(nameDB);
+    dataBase
+      .collection(collectionName)
+      .find({})
+      .toArray((err, result) => {
+        if (err) throw err;
+        if (result) {
+          res.status(200).send({
+            status: false,
+            data: [
+              {
+                pendiente: result.filter(e => e.state === "pendiente")
+              },
+              {
+                despachado: result.filter(e => e.state === "despachado")
+              },
+              {
+                entregado: result.filter(e => e.state === "entregado")
+              }
+            ],
+            message: "No se encontraron registros"
+          });
+        } else {
+          res.status(404).send({
+            status: false,
+            data: [],
+            message: "No se encontraron registros"
+          });
+        }
+      });
+  });
+}
+
 module.exports = {
   addOrder,
   getOrders,
   deleteOrder,
   getOrdersByUser,
   updateOrderState,
-  getOrdersDelivered
+  getOrdersDelivered,
+  getOrdersByState
 };
